@@ -18,6 +18,7 @@
             --text-dark: #2C3E50;
             --text-muted: #5D6D7E;
             --border-light: #D5DFE5;
+            --gold: #C9A227;
         }
 
         * {
@@ -32,8 +33,6 @@
             color: var(--text-dark);
             line-height: 1.7;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
         }
 
         .container {
@@ -48,6 +47,13 @@
             padding: 30px 0;
         }
 
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 16px;
+        }
+
         .back-link {
             display: inline-flex;
             align-items: center;
@@ -55,7 +61,6 @@
             color: var(--slate-blue);
             text-decoration: none;
             font-size: 0.9rem;
-            margin-bottom: 16px;
             transition: color 0.3s ease;
         }
 
@@ -70,88 +75,164 @@
             color: var(--navy);
         }
 
-        main {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 60px 24px;
-        }
-
-        .coming-soon {
-            text-align: center;
-            max-width: 500px;
-        }
-
-        .coming-soon-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            color: var(--slate-blue);
-        }
-
-        .coming-soon h2 {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 1.5rem;
-            color: var(--navy);
-            margin-bottom: 12px;
-        }
-
-        .coming-soon p {
+        .member-count {
+            font-size: 0.9rem;
             color: var(--text-muted);
-            margin-bottom: 32px;
         }
 
-        .founding-members {
+        main {
+            padding: 40px 0 80px;
+        }
+
+        .roster-header {
+            display: grid;
+            grid-template-columns: 80px 120px 1fr 140px;
+            gap: 16px;
+            padding: 16px 20px;
+            background: var(--navy);
+            color: var(--white);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .roster-table {
             background: var(--white);
             border: 1px solid var(--border-light);
-            padding: 24px;
-            text-align: left;
-        }
-
-        .founding-members h3 {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 0.85rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--slate-blue);
-            margin-bottom: 16px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid var(--border-light);
+            border-top: none;
         }
 
         .member-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
+            display: grid;
+            grid-template-columns: 80px 120px 1fr 140px;
+            gap: 16px;
+            padding: 16px 20px;
             border-bottom: 1px solid var(--border-light);
+            align-items: center;
+            transition: background 0.2s ease;
+        }
+
+        .member-row:hover {
+            background: rgba(74, 124, 155, 0.05);
         }
 
         .member-row:last-child {
             border-bottom: none;
         }
 
-        .member-info {
-            display: flex;
-            align-items: center;
-            gap: 16px;
+        .member-row.founder {
+            background: linear-gradient(90deg, rgba(201, 162, 39, 0.08) 0%, transparent 100%);
         }
 
-        .member-qc {
+        .qc-number {
             font-family: 'Playfair Display', Georgia, serif;
             font-weight: 600;
             color: var(--slate-blue);
-            min-width: 50px;
         }
 
-        .member-callsign {
-            color: var(--navy);
+        .founder .qc-number {
+            color: var(--gold);
+        }
+
+        .callsign {
             font-weight: 600;
+            color: var(--navy);
         }
 
-        .member-name {
+        .callsign a {
+            color: var(--navy);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .callsign a:hover {
+            color: var(--slate-blue);
+            text-decoration: underline;
+        }
+
+        .name {
+            color: var(--text-dark);
+        }
+
+        .founder-badge {
+            display: inline-block;
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--gold);
+            background: rgba(201, 162, 39, 0.15);
+            padding: 2px 8px;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+
+        .join-date {
             color: var(--text-muted);
             font-size: 0.9rem;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-muted);
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border: 3px solid var(--border-light);
+            border-top-color: var(--slate-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 16px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .error {
+            text-align: center;
+            padding: 40px 20px;
+            background: var(--white);
+            border: 1px solid var(--border-light);
+            color: var(--text-muted);
+        }
+
+        .error a {
+            color: var(--slate-blue);
+        }
+
+        .roster-footer {
+            margin-top: 40px;
+            text-align: center;
+            padding: 24px;
+            background: var(--white);
+            border: 1px solid var(--border-light);
+        }
+
+        .roster-footer p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .roster-footer a {
+            color: var(--slate-blue);
+            text-decoration: none;
+        }
+
+        .roster-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .last-updated {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            opacity: 0.7;
         }
 
         footer {
@@ -174,45 +255,61 @@
         .footer-text a:hover {
             text-decoration: underline;
         }
+
+        @media (max-width: 700px) {
+            .roster-header,
+            .member-row {
+                grid-template-columns: 60px 1fr;
+                gap: 8px;
+            }
+
+            .roster-header .hide-mobile,
+            .member-row .hide-mobile {
+                display: none;
+            }
+
+            .name {
+                font-size: 0.9rem;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+        }
     </style>
 </head>
 <body>
     <header>
         <div class="container">
             <a href="index.html" class="back-link">← Back to Home</a>
-            <h1>Member Roster</h1>
+            <div class="header-content">
+                <h1>Member Roster</h1>
+                <span class="member-count" id="member-count"></span>
+            </div>
         </div>
     </header>
 
     <main>
-        <div class="coming-soon">
-            <div class="coming-soon-icon">⚓</div>
-            <h2>Roster Coming Soon</h2>
-            <p>The full member roster is being compiled. In the meantime, here are our founding members:</p>
+        <div class="container">
+            <div class="roster-header">
+                <span>QC #</span>
+                <span>Callsign</span>
+                <span>Name</span>
+                <span class="hide-mobile">Joined</span>
+            </div>
             
-            <div class="founding-members">
-                <h3>Founding Members</h3>
-                <div class="member-row">
-                    <div class="member-info">
-                        <span class="member-qc">QC #1</span>
-                        <span class="member-callsign">K4MW</span>
-                    </div>
-                    <span class="member-name">Pete Wildman</span>
+            <div class="roster-table" id="roster-table">
+                <div class="loading">
+                    <div class="loading-spinner"></div>
+                    <p>Loading roster...</p>
                 </div>
-                <div class="member-row">
-                    <div class="member-info">
-                        <span class="member-qc">QC #2</span>
-                        <span class="member-callsign">WN7JT</span>
-                    </div>
-                    <span class="member-name">Gabe Donley</span>
-                </div>
-                <div class="member-row">
-                    <div class="member-info">
-                        <span class="member-qc">QC #3</span>
-                        <span class="member-callsign">KI7QCF</span>
-                    </div>
-                    <span class="member-name">Forrest Stephenson</span>
-                </div>
+            </div>
+
+            <div class="roster-footer">
+                <p>Want to join the crew? <a href="index.html#membership">Learn how to become a member</a></p>
+                <p class="last-updated" id="last-updated"></p>
             </div>
         </div>
     </main>
@@ -224,5 +321,185 @@
             </p>
         </div>
     </footer>
+
+    <script>
+        // Published Google Sheet CSV URL
+        const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRBfNWrtgvUxTJQL96aK4g7ctZZ-Z572mBEbsscarGQWrbHg66yfxf-Jxw-bZ1ke7KX0zhJk6nUFWhL/pub?output=csv';
+        
+        // CORS proxies to try (in order)
+        const CORS_PROXIES = [
+            'https://corsproxy.io/?',
+            'https://api.allorigins.win/raw?url=',
+            'https://cors-anywhere.herokuapp.com/'
+        ];
+        
+        // Fetch roster using CORS proxy
+        async function fetchRoster() {
+            let lastError;
+            
+            for (const proxy of CORS_PROXIES) {
+                try {
+                    const url = proxy + encodeURIComponent(SHEET_CSV_URL);
+                    const response = await fetch(url);
+                    
+                    if (!response.ok) continue;
+                    
+                    const csvText = await response.text();
+                    const members = parseCSV(csvText);
+                    
+                    if (members.length > 0) {
+                        renderRoster(members);
+                        return;
+                    }
+                } catch (error) {
+                    lastError = error;
+                    console.log(`Proxy ${proxy} failed, trying next...`);
+                }
+            }
+            
+            console.error('All proxies failed:', lastError);
+            showError();
+        }
+
+        // Parse CSV text into array of member objects
+        function parseCSV(csvText) {
+            const lines = csvText.split('\n');
+            const members = [];
+            
+            // Find the header row (contains "Callsign")
+            let headerIndex = -1;
+            for (let i = 0; i < lines.length; i++) {
+                if (lines[i].includes('Callsign')) {
+                    headerIndex = i;
+                    break;
+                }
+            }
+            
+            if (headerIndex === -1) return members;
+            
+            // Parse data rows after header
+            for (let i = headerIndex + 1; i < lines.length; i++) {
+                const row = parseCSVLine(lines[i]);
+                
+                // Skip empty rows
+                if (!row[0] || row[0].trim() === '') continue;
+                
+                const member = {
+                    callsign: row[0]?.trim() || '',
+                    name: row[1]?.trim() || '',
+                    joinDate: row[2]?.trim() || '',
+                    qcNumber: parseInt(row[3]) || 0
+                };
+                
+                if (member.callsign && member.qcNumber) {
+                    members.push(member);
+                }
+            }
+            
+            // Sort by QC number
+            members.sort((a, b) => a.qcNumber - b.qcNumber);
+            
+            return members;
+        }
+
+        // Parse a single CSV line (handles quoted fields)
+        function parseCSVLine(line) {
+            const result = [];
+            let current = '';
+            let inQuotes = false;
+            
+            for (let i = 0; i < line.length; i++) {
+                const char = line[i];
+                
+                if (char === '"') {
+                    inQuotes = !inQuotes;
+                } else if (char === ',' && !inQuotes) {
+                    result.push(current);
+                    current = '';
+                } else {
+                    current += char;
+                }
+            }
+            result.push(current);
+            
+            return result;
+        }
+
+        // Format date string
+        function formatDate(dateStr) {
+            if (!dateStr) return '';
+            
+            // Try parsing MM/DD/YYYY format
+            const parts = dateStr.split('/');
+            if (parts.length === 3) {
+                const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
+                               'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                const month = parseInt(parts[0]) - 1;
+                const day = parseInt(parts[1]);
+                const year = parts[2];
+                
+                if (month >= 0 && month < 12) {
+                    return `${months[month]} ${day}, ${year}`;
+                }
+            }
+            
+            return dateStr;
+        }
+
+        // Render the roster table
+        function renderRoster(members) {
+            const table = document.getElementById('roster-table');
+            const countEl = document.getElementById('member-count');
+            
+            if (members.length === 0) {
+                showError();
+                return;
+            }
+            
+            countEl.textContent = `${members.length} Member${members.length !== 1 ? 's' : ''}`;
+            
+            let html = '';
+            
+            members.forEach(member => {
+                const isFounder = member.qcNumber <= 3;
+                const founderClass = isFounder ? 'founder' : '';
+                const founderBadge = isFounder ? '<span class="founder-badge">Founder</span>' : '';
+                
+                html += `
+                    <div class="member-row ${founderClass}">
+                        <span class="qc-number">QC #${member.qcNumber}</span>
+                        <span class="callsign">
+                            <a href="https://www.qrz.com/db/${member.callsign}" target="_blank" rel="noopener">${member.callsign}</a>
+                        </span>
+                        <span class="name">${member.name}${founderBadge}</span>
+                        <span class="join-date hide-mobile">${formatDate(member.joinDate)}</span>
+                    </div>
+                `;
+            });
+            
+            table.innerHTML = html;
+            
+            // Update timestamp
+            const now = new Date();
+            document.getElementById('last-updated').textContent = 
+                `Last updated: ${now.toLocaleDateString()} at ${now.toLocaleTimeString()}`;
+        }
+
+        // Show error message
+        function showError() {
+            const table = document.getElementById('roster-table');
+            table.innerHTML = `
+                <div class="error">
+                    <p>Unable to load roster data.</p>
+                    <p style="margin-top: 12px; font-size: 0.85rem;">
+                        The spreadsheet may need to be <a href="https://support.google.com/docs/answer/183965" target="_blank" rel="noopener">published to the web</a>.
+                    </p>
+                </div>
+            `;
+        }
+
+        // Load roster on page load
+        fetchRoster();
+    </script>
 </body>
 </html>
