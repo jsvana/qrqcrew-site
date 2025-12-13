@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QRQ Crew Club | High-Speed CW Amateur Radio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00A8CC;
+            --primary-dim: #0088A8;
+            --primary-glow: rgba(0, 168, 204, 0.3);
+            --accent: #00D4FF;
+            --dark-bg: #0B1929;
+            --panel-bg: #112240;
+            --panel-border: #1E3A5F;
+            --text-primary: #E8F4F8;
+            --text-secondary: #8BA4B4;
+            --morse-dot: 0.1s;
+            --morse-dash: 0.3s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'IBM Plex Mono', monospace;
+            background-color: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        /* Scanline overlay effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0, 0, 0, 0.1) 2px,
+                rgba(0, 0, 0, 0.1) 4px
+            );
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        header {
+            padding: 60px 0 40px;
+            text-align: center;
+            border-bottom: 1px solid var(--panel-border);
+            position: relative;
+        }
+
+        .callsign-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--dark-bg);
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            padding: 6px 16px;
+            margin-bottom: 24px;
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px var(--primary-glow); }
+            50% { box-shadow: 0 0 40px var(--primary-glow), 0 0 60px var(--primary-glow); }
+        }
+
+        h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--primary);
+            text-shadow: 0 0 40px var(--primary-glow);
+            margin-bottom: 8px;
+        }
+
+        .tagline {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+        }
+
+        .morse-decoration {
+            margin-top: 32px;
+            font-size: 1.5rem;
+            color: var(--primary-dim);
+            letter-spacing: 0.5em;
+            opacity: 0.6;
+        }
+
+        .charter-link {
+            display: inline-block;
+            margin-top: 24px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            padding: 12px 24px;
+            border: 1px solid var(--panel-border);
+            transition: all 0.3s ease;
+        }
+
+        .charter-link:hover {
+            color: var(--primary);
+            border-color: var(--primary);
+            background: rgba(255, 184, 0, 0.05);
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--panel-bg);
+            border-bottom: 1px solid var(--panel-border);
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+            padding: 8px 0;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+            text-shadow: 0 0 20px var(--primary-glow);
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+            border-bottom: 1px solid var(--panel-border);
+        }
+
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        .section-label {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-label::before {
+            content: '//';
+            opacity: 0.5;
+        }
+
+        h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            margin-bottom: 32px;
+            color: var(--text-primary);
+        }
+
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            max-width: 700px;
+        }
+
+        /* Purpose list */
+        .purpose-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .purpose-item {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            padding: 28px;
+            position: relative;
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .purpose-item:hover {
+            border-color: var(--primary-dim);
+            transform: translateY(-2px);
+        }
+
+        .purpose-item::before {
+            content: attr(data-number);
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            opacity: 0.15;
+        }
+
+        .purpose-item p {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        /* Founders */
+        .founders-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            margin-top: 40px;
+        }
+
+        .founder-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            padding: 32px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .founder-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 40px var(--primary-glow);
+        }
+
+        .founder-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .founder-card:hover::before {
+            opacity: 1;
+        }
+
+        .qc-number {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            opacity: 0.3;
+            margin-bottom: 16px;
+        }
+
+        .founder-role {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .founder-name {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .founder-callsign {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .founder-links {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .founder-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.8rem;
+            padding: 8px 16px;
+            border: 1px solid var(--panel-border);
+            transition: all 0.3s ease;
+        }
+
+        .founder-link:hover {
+            color: var(--primary);
+            border-color: var(--primary);
+            background: rgba(255, 184, 0, 0.05);
+        }
+
+        .founder-link svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* Membership info */
+        .membership-box {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-left: 3px solid var(--primary);
+            padding: 32px;
+            margin-top: 32px;
+        }
+
+        .membership-box h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-bottom: 16px;
+            letter-spacing: 0.05em;
+        }
+
+        .speed-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--dark-bg);
+            font-weight: 700;
+            font-size: 1.25rem;
+            padding: 4px 12px;
+            margin: 0 4px;
+        }
+
+        .equipment-list {
+            margin-top: 24px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .equipment-allowed, .equipment-forbidden {
+            padding: 16px;
+            border: 1px solid var(--panel-border);
+        }
+
+        .equipment-allowed {
+            border-left: 3px solid #4CAF50;
+        }
+
+        .equipment-forbidden {
+            border-left: 3px solid #f44336;
+        }
+
+        .equipment-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .equipment-allowed .equipment-label {
+            color: #4CAF50;
+        }
+
+        .equipment-forbidden .equipment-label {
+            color: #f44336;
+        }
+
+        .equipment-list ul {
+            list-style: none;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .equipment-list li {
+            padding: 4px 0;
+        }
+
+        /* Email CTA */
+        .email-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--primary);
+            color: var(--dark-bg);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 16px 32px;
+            margin-top: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .email-cta:hover {
+            background: #FFC933;
+            box-shadow: 0 0 30px var(--primary-glow);
+            transform: translateY(-2px);
+        }
+
+        /* Roster link */
+        .roster-section {
+            text-align: center;
+            padding: 100px 0;
+        }
+
+        .roster-link {
+            display: inline-block;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: 0.1em;
+            padding: 20px 48px;
+            border: 2px solid var(--primary);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .roster-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--primary);
+            transition: left 0.4s ease;
+            z-index: -1;
+        }
+
+        .roster-link:hover {
+            color: var(--dark-bg);
+        }
+
+        .roster-link:hover::before {
+            left: 0;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--panel-bg);
+            border-top: 1px solid var(--panel-border);
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer-morse {
+            font-size: 0.9rem;
+            color: var(--primary-dim);
+            letter-spacing: 0.3em;
+            margin-bottom: 16px;
+            opacity: 0.6;
+        }
+
+        .footer-text {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .footer-text a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav ul {
+                gap: 20px;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            .founders-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .equipment-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="callsign-badge">EST. DECEMBER 10, 2025</div>
+            <h1>QRQ Crew</h1>
+            <p class="tagline">High-Speed CW Amateur Radio Club</p>
+            <div class="morse-decoration">-.- .-- .-. --.-</div>
+            <a href="https://docs.google.com/document/d/1CHWTuEEDSK7k5NpMyZ5Caoi4Mc9HXEFU/edit" target="_blank" rel="noopener" class="charter-link">Read the Founding Charter →</a>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#purpose">Purpose</a></li>
+            <li><a href="#founders">Founders</a></li>
+            <li><a href="#membership">Membership</a></li>
+            <li><a href="#roster">Roster</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="purpose">
+            <div class="container">
+                <div class="section-label">Mission</div>
+                <h2>Why We Exist</h2>
+                <p>The QRQ Crew exists to initiate Amateur Radio Operators into the culture, practice, and techniques of high-speed (QRQ) Morse Code CW operation. We are a community built on the pursuit of proficiency at <span class="speed-badge">35 WPM</span> and above.</p>
+
+                <div class="purpose-grid">
+                    <div class="purpose-item" data-number="01">
+                        <p>Promote the learning, practice, and use of high-speed Morse Code (CW) on the Amateur Radio bands.</p>
+                    </div>
+                    <div class="purpose-item" data-number="02">
+                        <p>Provide a gateway for operators interested in achieving proficiency at 35 WPM and above.</p>
+                    </div>
+                    <div class="purpose-item" data-number="03">
+                        <p>Offer support, encouragement, and guidance to aspiring QRQ operators.</p>
+                    </div>
+                    <div class="purpose-item" data-number="04">
+                        <p>Create a welcoming, non-judgmental environment where members can develop their abilities comfortably.</p>
+                    </div>
+                    <div class="purpose-item" data-number="05">
+                        <p>Foster community among like-minded Amateurs through practice, mentorship, and shared operating events.</p>
+                    </div>
+                    <div class="purpose-item" data-number="06">
+                        <p>Organize operating events such as Sprints, Activity Nights, and other gatherings to promote on-air operation at higher speeds.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="founders">
+            <div class="container">
+                <div class="section-label">Leadership</div>
+                <h2>Founding Members & Officers</h2>
+
+                <div class="founders-grid">
+                    <div class="founder-card">
+                        <div class="qc-number">QC#1</div>
+                        <div class="founder-role">Secretary / Treasurer</div>
+                        <div class="founder-name">Pete Wildman</div>
+                        <div class="founder-callsign">K4MW</div>
+                        <div class="founder-links">
+                            <a href="https://www.qrz.com/db/K4MW" target="_blank" rel="noopener" class="founder-link">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                                QRZ
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="founder-card">
+                        <div class="qc-number">QC#2</div>
+                        <div class="founder-role">Vice President</div>
+                        <div class="founder-name">Gabe Donley</div>
+                        <div class="founder-callsign">WN7JT</div>
+                        <div class="founder-links">
+                            <a href="https://www.qrz.com/db/WN7JT" target="_blank" rel="noopener" class="founder-link">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                                QRZ
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="founder-card">
+                        <div class="qc-number">QC#3</div>
+                        <div class="founder-role">President</div>
+                        <div class="founder-name">Forrest Stephenson</div>
+                        <div class="founder-callsign">KI7QCF</div>
+                        <div class="founder-links">
+                            <a href="https://www.qrz.com/db/KI7QCF" target="_blank" rel="noopener" class="founder-link">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                                QRZ
+                            </a>
+                            <a href="https://www.youtube.com/@Utahforrest" target="_blank" rel="noopener" class="founder-link">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+                                YouTube
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="membership">
+            <div class="container">
+                <div class="section-label">Join Us</div>
+                <h2>Membership Requirements</h2>
+                <p>Membership is open to any licensed Amateur Radio operator who demonstrates their commitment to learning QRQ CW. This club is for those <em>wanting to learn</em> QRQ—you don't need to be an expert, just eager.</p>
+
+                <div class="membership-box">
+                    <h3>How to Join</h3>
+                    <p style="margin-bottom: 16px;">Initiate contact with a QRQ Crew member at <span class="speed-badge">35 WPM</span> CW, then follow up with an email request.</p>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0;">After initial contact, you may QRS to a comfortable speed. The requirement is to initiate contact with clear, well-formed, copyable code at 35 WPM—however, sustaining a full QSO or being able to copy at that speed is not required.</p>
+                    
+                    <a href="mailto:QRQCREW@GMAIL.COM" class="email-cta">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                        QRQCREW@GMAIL.COM
+                    </a>
+                </div>
+
+                <div class="membership-box" style="margin-top: 24px; border-left-color: var(--text-secondary);">
+                    <h3>Operating Standards</h3>
+                    <p style="margin-bottom: 0;">All code must be sent by hand and decoded by ear at all times. This club is for <strong>operators</strong>.</p>
+                    
+                    <div class="equipment-list">
+                        <div class="equipment-allowed">
+                            <div class="equipment-label">✓ Allowed</div>
+                            <ul>
+                                <li>Straight keys (how?)</li>
+                                <li>Bugs</li>
+                                <li>Paddles</li>
+                                <li>Cooties</li>
+                                <li>Single & twin lever paddles with electronic keyers</li>
+                            </ul>
+                        </div>
+                        <div class="equipment-forbidden">
+                            <div class="equipment-label">✗ Not Allowed</div>
+                            <ul>
+                                <li>CW-Keyboards</li>
+                                <li>Memory keyers</li>
+                                <li>Automated code from devices</li>
+                                <li>Electronic/mechanical decoders</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="membership-box" style="margin-top: 24px; border-left-color: #4CAF50;">
+                    <h3>Cost</h3>
+                    <p style="margin-bottom: 0; font-size: 1.1rem;">Membership is <strong style="color: #4CAF50;">free</strong>. There are no dues.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="roster" class="roster-section">
+            <div class="container">
+                <div class="section-label" style="justify-content: center;">Members</div>
+                <h2>Club Roster</h2>
+                <p style="text-align: center; margin: 0 auto 40px;">View the current list of QRQ Crew members.</p>
+                <a href="roster.html" class="roster-link">View Full Roster →</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-morse">--.- .-. --.- / -.-. .-. . .--</div>
+            <p class="footer-text">
+                QRQ Crew Club © 2025 · <a href="https://docs.google.com/document/d/1CHWTuEEDSK7k5NpMyZ5Caoi4Mc9HXEFU/edit" target="_blank" rel="noopener">Founding Charter</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

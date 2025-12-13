@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member Roster | QRQ Crew Club</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00A8CC;
+            --primary-dim: #0088A8;
+            --primary-glow: rgba(0, 168, 204, 0.3);
+            --accent: #00D4FF;
+            --dark-bg: #0B1929;
+            --panel-bg: #112240;
+            --panel-border: #1E3A5F;
+            --text-primary: #E8F4F8;
+            --text-secondary: #8BA4B4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'IBM Plex Mono', monospace;
+            background-color: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0, 0, 0, 0.1) 2px,
+                rgba(0, 0, 0, 0.1) 4px
+            );
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        header {
+            padding: 40px 0;
+            border-bottom: 1px solid var(--panel-border);
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            margin-bottom: 24px;
+        }
+
+        .back-link:hover {
+            color: var(--primary);
+        }
+
+        h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            color: var(--primary);
+            text-shadow: 0 0 30px var(--primary-glow);
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 24px;
+        }
+
+        .coming-soon {
+            text-align: center;
+            max-width: 500px;
+        }
+
+        .coming-soon-icon {
+            font-size: 4rem;
+            margin-bottom: 24px;
+            opacity: 0.3;
+        }
+
+        .coming-soon h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.75rem;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            letter-spacing: 0.05em;
+        }
+
+        .coming-soon p {
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+        }
+
+        .founding-members {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            padding: 24px;
+            text-align: left;
+        }
+
+        .founding-members h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+
+        .member-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--panel-border);
+        }
+
+        .member-row:last-child {
+            border-bottom: none;
+        }
+
+        .member-info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .member-qc {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            color: var(--primary);
+            opacity: 0.5;
+            min-width: 50px;
+        }
+
+        .member-callsign {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .member-name {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        footer {
+            background: var(--panel-bg);
+            border-top: 1px solid var(--panel-border);
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer-text {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .footer-text a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="index.html" class="back-link">← Back to Home</a>
+            <h1>Member Roster</h1>
+        </div>
+    </header>
+
+    <main>
+        <div class="coming-soon">
+            <div class="coming-soon-icon">📡</div>
+            <h2>Roster Coming Soon</h2>
+            <p>The full member roster is being compiled. In the meantime, here are our founding members:</p>
+            
+            <div class="founding-members">
+                <h3>Founding Members</h3>
+                <div class="member-row">
+                    <div class="member-info">
+                        <span class="member-qc">QC#1</span>
+                        <span class="member-callsign">K4MW</span>
+                    </div>
+                    <span class="member-name">Pete Wildman</span>
+                </div>
+                <div class="member-row">
+                    <div class="member-info">
+                        <span class="member-qc">QC#2</span>
+                        <span class="member-callsign">WN7JT</span>
+                    </div>
+                    <span class="member-name">Gabe Donley</span>
+                </div>
+                <div class="member-row">
+                    <div class="member-info">
+                        <span class="member-qc">QC#3</span>
+                        <span class="member-callsign">KI7QCF</span>
+                    </div>
+                    <span class="member-name">Forrest Stephenson</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="footer-text">
+                QRQ Crew Club © 2025 · <a href="index.html">Home</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
