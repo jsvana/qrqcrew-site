@@ -1,5 +1,5 @@
 # QRQ Crew Callsign Notes for Ham2K PoLo
-# Generated: 2025-12-19 01:38:04 UTC
+# Generated: 2025-12-23 04:16:34 UTC
 # https://qrqcrew.club
 # Do not edit manually - this file is auto-generated
 
@@ -10,16 +10,21 @@ AI5BE ⚓ QRQ Crew #12
 AJ7CM ⚓ QRQ Crew #9
 AK4MT ⚓ QRQ Crew #54
 DF7TV ⚓ QRQ Crew #58
+K1JD ⚓ QRQ Crew #63
 K2EJT ⚓ QRQ Crew #20
 K4FIR ⚓ QRQ Crew #41
 K4FR ⚓ QRQ Crew #4
 K4MW ⚓ QRQ Crew #1
 K5OHY ⚓ QRQ Crew #13
+K6AJ ⚓ QRQ Crew #61
 K8CES ⚓ QRQ Crew #11
+KB7RYU ⚓ QRQ Crew #66
 KC0ZPS ⚓ QRQ Crew #50
 KD7DUG ⚓ QRQ Crew #26
 KD7J ⚓ QRQ Crew #34
+KE2FUA ⚓ QRQ Crew #62
 KE8TBM ⚓ QRQ Crew #36
+KE8UEX ⚓ QRQ Crew #65
 KE9BHN ⚓ QRQ Crew #16
 KF6YAL ⚓ QRQ Crew #8
 KG5VNQ ⚓ QRQ Crew #24
@@ -31,19 +36,25 @@ KM7COJ ⚓ QRQ Crew #28
 KN3A ⚓ QRQ Crew #30
 KO4TFE ⚓ QRQ Crew #21
 KQ4DUX ⚓ QRQ Crew #37
+KQ4MVW ⚓ QRQ Crew #64
 KR4EBK ⚓ QRQ Crew #29
 KR8P ⚓ QRQ Crew #7
 KT0AA ⚓ QRQ Crew #18
 KV8X ⚓ QRQ Crew #39
+N1CCC ⚓ QRQ Crew #60
 N1XV ⚓ QRQ Crew #43
+N4EWD ⚓ QRQ Crew #59
 N4GO ⚓ QRQ Crew #40
+N6HI ⚓ QRQ Crew #70
 N6RUN ⚓ QRQ Crew #25
+N8JMS ⚓ QRQ Crew #69
 N9FZ ⚓ QRQ Crew #32
 N9HO ⚓ QRQ Crew #14
 NA7DO ⚓ QRQ Crew #19
 ND4K ⚓ QRQ Crew #42
 NN3E ⚓ QRQ Crew #52
 NR4A ⚓ QRQ Crew #51
+NU1D ⚓ QRQ Crew #68
 VA4ADM ⚓ QRQ Crew #27
 VE1EM ⚓ QRQ Crew #22
 VE7SRF ⚓ QRQ Crew #33
@@ -55,6 +66,7 @@ W6JSV ⚓ QRQ Crew #10
 W6PUG ⚓ QRQ Crew #15
 W7LHT ⚓ QRQ Crew #31
 WB0RLJ ⚓ QRQ Crew #46
+WB4AQL ⚓ QRQ Crew #67
 WB4IT ⚓ QRQ Crew #47
 WD5JR ⚓ QRQ Crew #23
 WE5J ⚓ QRQ Crew #55
