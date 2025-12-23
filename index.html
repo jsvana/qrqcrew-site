@@ -468,6 +468,19 @@
             text-decoration: underline;
         }
 
+        .polo-notes {
+            margin-top: 2rem;
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            border-left: 3px solid var(--gold);
+            font-size: 0.95rem;
+        }
+
+        .polo-notes a {
+            color: var(--gold);
+        }
+
         /* Responsive */
         @media (max-width: 600px) {
             nav ul {
@@ -660,6 +673,10 @@
                 <h2>Club Roster</h2>
                 <p class="section-intro">View the current list of QRQ Crew members.</p>
                 <a href="roster.html" class="roster-link">View Full Roster →</a>
+                <p class="polo-notes">
+                    <strong>📡 Ham2K PoLo Integration</strong><br>
+                    Import our <a href="members.txt">callsign notes file</a> to automatically display QRQ Crew membership info when logging members.
+                </p>
             </div>
         </section>
     </main>
