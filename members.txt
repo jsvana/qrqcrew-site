@@ -1,23 +1,32 @@
 # QRQ Crew Callsign Notes for Ham2K PoLo
-# Generated: 2025-12-23 04:16:34 UTC
+# Generated: 2026-01-01 15:25:56 UTC
 # https://qrqcrew.club
 # Do not edit manually - this file is auto-generated
 
+AA0YY ⚓ QRQ Crew #86
+AB5M ⚓ QRQ Crew #90
 AC4NK ⚓ QRQ Crew #5
 AD7N ⚓ QRQ Crew #17
 AE6Z ⚓ QRQ Crew #49
 AI5BE ⚓ QRQ Crew #12
 AJ7CM ⚓ QRQ Crew #9
 AK4MT ⚓ QRQ Crew #54
+DF7TR ⚓ QRQ Crew #71
 DF7TV ⚓ QRQ Crew #58
+G4BFG ⚓ QRQ Crew #92
+K0VBU ⚓ QRQ Crew #76
 K1JD ⚓ QRQ Crew #63
 K2EJT ⚓ QRQ Crew #20
+K2MZ ⚓ QRQ Crew #83
 K4FIR ⚓ QRQ Crew #41
 K4FR ⚓ QRQ Crew #4
 K4MW ⚓ QRQ Crew #1
 K5OHY ⚓ QRQ Crew #13
 K6AJ ⚓ QRQ Crew #61
+K6TTA ⚓ QRQ Crew #75
 K8CES ⚓ QRQ Crew #11
+K8DK ⚓ QRQ Crew #78
+K9ID ⚓ QRQ Crew #81
 KB7RYU ⚓ QRQ Crew #66
 KC0ZPS ⚓ QRQ Crew #50
 KD7DUG ⚓ QRQ Crew #26
@@ -28,11 +37,13 @@ KE8UEX ⚓ QRQ Crew #65
 KE9BHN ⚓ QRQ Crew #16
 KF6YAL ⚓ QRQ Crew #8
 KG5VNQ ⚓ QRQ Crew #24
+KI5DRY ⚓ QRQ Crew #89
 KI5GTR ⚓ QRQ Crew #38
 KI7QCF ⚓ QRQ Crew #3
 KJ5CMP ⚓ QRQ Crew #44
 KK7QAS ⚓ QRQ Crew #45
 KM7COJ ⚓ QRQ Crew #28
+KN2D ⚓ QRQ Crew #77
 KN3A ⚓ QRQ Crew #30
 KO4TFE ⚓ QRQ Crew #21
 KQ4DUX ⚓ QRQ Crew #37
@@ -40,11 +51,17 @@ KQ4MVW ⚓ QRQ Crew #64
 KR4EBK ⚓ QRQ Crew #29
 KR8P ⚓ QRQ Crew #7
 KT0AA ⚓ QRQ Crew #18
+KV1I ⚓ QRQ Crew #74
 KV8X ⚓ QRQ Crew #39
 N1CCC ⚓ QRQ Crew #60
 N1XV ⚓ QRQ Crew #43
+N2EC ⚓ QRQ Crew #79
+N2TNN ⚓ QRQ Crew #80
+N3JT ⚓ QRQ Crew #73
+N3VO ⚓ QRQ Crew #87
 N4EWD ⚓ QRQ Crew #59
 N4GO ⚓ QRQ Crew #40
+N4LSJ ⚓ QRQ Crew #82
 N6HI ⚓ QRQ Crew #70
 N6RUN ⚓ QRQ Crew #25
 N8JMS ⚓ QRQ Crew #69
@@ -52,7 +69,9 @@ N9FZ ⚓ QRQ Crew #32
 N9HO ⚓ QRQ Crew #14
 NA7DO ⚓ QRQ Crew #19
 ND4K ⚓ QRQ Crew #42
+NE5A ⚓ QRQ Crew #72
 NN3E ⚓ QRQ Crew #52
+NQ8J ⚓ QRQ Crew #84
 NR4A ⚓ QRQ Crew #51
 NU1D ⚓ QRQ Crew #68
 VA4ADM ⚓ QRQ Crew #27
@@ -60,11 +79,13 @@ VE1EM ⚓ QRQ Crew #22
 VE7SRF ⚓ QRQ Crew #33
 W1VES ⚓ QRQ Crew #57
 W1WC ⚓ QRQ Crew #35
+W2DON ⚓ QRQ Crew #85
 W2OZB ⚓ QRQ Crew #56
 W5RZ ⚓ QRQ Crew #53
 W6JSV ⚓ QRQ Crew #10
 W6PUG ⚓ QRQ Crew #15
 W7LHT ⚓ QRQ Crew #31
+WA9CW ⚓ QRQ Crew #88
 WB0RLJ ⚓ QRQ Crew #46
 WB4AQL ⚓ QRQ Crew #67
 WB4IT ⚓ QRQ Crew #47
@@ -73,3 +94,4 @@ WE5J ⚓ QRQ Crew #55
 WI5D ⚓ QRQ Crew #6
 WJ0C ⚓ QRQ Crew #48
 WN7JT ⚓ QRQ Crew #2
+XE1AY ⚓ QRQ Crew #91
