@@ -1,5 +1,5 @@
 # SKCC Callsign Notes for Ham2K PoLo
-# Generated: 2026-01-06 21:52:39 UTC
+# Generated: 2026-01-06 22:52:49 UTC
 # Do not edit manually - this file is auto-generated
 
 AA0AA 🔑 SKCC #8576
@@ -7673,7 +7673,7 @@ K7SBF 🔑 SKCC #20644
 K7SDU 🔑 SKCC #409
 K7SDW 🔑 SKCC #6224T
 K7SH 🔑 SKCC #25579T
-K7SHR 🔑 SKCC #23479C
+K7SHR 🔑 SKCC #23479T
 K7SKI 🔑 SKCC #5395
 K7SM 🔑 SKCC #9557
 K7SOX 🔑 SKCC #30390
@@ -18833,7 +18833,7 @@ N8DGW 🔑 SKCC #9294
 N8DIV 🔑 SKCC #5565
 N8DIX 🔑 SKCC #9271
 N8DKA 🔑 SKCC #11099
-N8DKH 🔑 SKCC #29229T
+N8DKH 🔑 SKCC #29229S
 N8DLP 🔑 SKCC #29303
 N8DNA 🔑 SKCC #9878
 N8DQU 🔑 SKCC #949
