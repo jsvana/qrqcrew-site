@@ -1,5 +1,5 @@
 # CWops Callsign Notes for Ham2K PoLo
-# Generated: 2026-01-08 17:00:14 UTC
+# Generated: 2026-01-08 18:00:24 UTC
 # Do not edit manually - this file is auto-generated
 
 AA0FO 🎹 CWops #1532
@@ -224,6 +224,7 @@ CU3AA 🎹 CWops #1804
 CX6VM 🎹 CWops #525
 CX7CW 🎹 CWops #570
 CX7TT 🎹 CWops #518
+DA1DX 🎹 CWops #3858
 DD5KG 🎹 CWops #2471
 DD5XX 🎹 CWops #2354
 DD6CW 🎹 CWops #1890
