@@ -1,5 +1,5 @@
 # SKCC Callsign Notes for Ham2K PoLo
-# Generated: 2026-01-22 01:57:30 UTC
+# Generated: 2026-01-22 02:57:40 UTC
 # Do not edit manually - this file is auto-generated
 
 AA0AA 🔑 SKCC #8576
@@ -17798,7 +17798,6 @@ N4MIO 🔑 SKCC #5873
 N4MIR 🔑 SKCC #14618
 N4MJG 🔑 SKCC #7305
 N4MJL 🔑 SKCC #28438C
-N4MM 🔑 SKCC #2553
 N4MQU 🔑 SKCC #14804
 N4MT 🔑 SKCC #6256
 N4MTB 🔑 SKCC #13237
