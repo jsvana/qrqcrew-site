@@ -1,5 +1,5 @@
 # QRQ Crew Callsign Notes for Ham2K PoLo
-# Generated: 2026-01-29 14:30:59 UTC
+# Generated: 2026-01-29 15:31:08 UTC
 # Do not edit manually - this file is auto-generated
 
 AA0YY ⚓ QRQ Crew #86
@@ -40,6 +40,7 @@ KC0ZPS ⚓ QRQ Crew #50
 KC1UBH ⚓ QRQ Crew #96
 KD7DUG ⚓ QRQ Crew #26
 KD7J ⚓ QRQ Crew #34
+KE0M ⚓ QRQ Crew #117
 KE2FUA ⚓ QRQ Crew #62
 KE8TBM ⚓ QRQ Crew #36
 KE8UEX ⚓ QRQ Crew #65
