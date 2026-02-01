@@ -1,5 +1,5 @@
 # SKCC Callsign Notes for Ham2K PoLo
-# Generated: 2026-02-01 20:48:05 UTC
+# Generated: 2026-02-01 21:48:16 UTC
 # Do not edit manually - this file is auto-generated
 
 AA0AA 🔑 SKCC #8576
@@ -8331,7 +8331,7 @@ K9OIC 🔑 SKCC #3260
 K9OSC 🔑 SKCC #1540T
 K9OT 🔑 SKCC #8012
 K9OU 🔑 SKCC #24640
-K9OZ 🔑 SKCC #27580C
+K9OZ 🔑 SKCC #27580T
 K9PAC 🔑 SKCC #7251
 K9PDQ 🔑 SKCC #11835
 K9PET 🔑 SKCC #1192
