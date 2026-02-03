@@ -20,6 +20,7 @@
             --text-muted: #5D6D7E;
             --border-light: #D5DFE5;
             --gold: #C9A227;
+            --tech-blue: #4A90A4;
         }
 
         * {
@@ -126,6 +127,14 @@
             background: linear-gradient(90deg, rgba(201, 162, 39, 0.08) 0%, transparent 100%);
         }
 
+        .member-row.tech-guy {
+            background: linear-gradient(90deg, rgba(74, 144, 164, 0.08) 0%, transparent 100%);
+        }
+
+        .tech-guy .qc-number {
+            color: var(--tech-blue);
+        }
+
         .qc-number {
             font-family: 'Playfair Display', Georgia, serif;
             font-weight: 600;
@@ -164,6 +173,19 @@
             text-transform: uppercase;
             color: var(--gold);
             background: rgba(201, 162, 39, 0.15);
+            padding: 2px 8px;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+
+        .tech-badge {
+            display: inline-block;
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--tech-blue);
+            background: rgba(74, 144, 164, 0.15);
             padding: 2px 8px;
             margin-left: 8px;
             vertical-align: middle;
@@ -287,6 +309,16 @@
             .member-row.founder {
                 background: var(--white);
                 border-left: 3px solid var(--gold);
+            }
+
+            .member-row.tech-guy {
+                background: var(--white);
+                border-left: 3px solid var(--tech-blue);
+            }
+
+            .tech-guy .qc-number {
+                background: var(--tech-blue);
+                color: var(--white);
             }
 
             .qc-number {
@@ -532,16 +564,26 @@
             
             members.forEach(member => {
                 const isFounder = member.qcNumber <= 3;
-                const founderClass = isFounder ? 'founder' : '';
-                const founderBadge = isFounder ? '<span class="founder-badge">Founder</span>' : '';
-                
+                const isTechGuy = member.callsign.toUpperCase() === 'W6JSV';
+
+                let rowClass = '';
+                let badge = '';
+
+                if (isFounder) {
+                    rowClass = 'founder';
+                    badge = '<span class="founder-badge">Founder</span>';
+                } else if (isTechGuy) {
+                    rowClass = 'tech-guy';
+                    badge = '<span class="tech-badge">Resident Computer Guy</span>';
+                }
+
                 html += `
-                    <div class="member-row ${founderClass}">
+                    <div class="member-row ${rowClass}">
                         <span class="qc-number">QC #${member.qcNumber}</span>
                         <span class="callsign">
                             <a href="https://www.qrz.com/db/${member.callsign}" target="_blank" rel="noopener">${member.callsign}</a>
                         </span>
-                        <span class="name">${member.name}${founderBadge}</span>
+                        <span class="name">${member.name}${badge}</span>
                         <span class="join-date">${formatDate(member.joinDate)}</span>
                     </div>
                 `;
