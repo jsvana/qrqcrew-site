@@ -1,5 +1,5 @@
 # CWops Callsign Notes for Ham2K PoLo
-# Generated: 2026-02-04 05:59:37 UTC
+# Generated: 2026-02-04 06:59:51 UTC
 # Do not edit manually - this file is auto-generated
 
 AA0FO 🎹 CWops #1532
@@ -1304,6 +1304,7 @@ KG1V 🎹 CWops #3262
 KG3V 🎹 CWops #1034
 KG4CRJ 🎹 CWops #2378
 KG4IKQ 🎹 CWops #1458
+KG4O 🎹 CWops #3611
 KG4Q 🎹 CWops #1956
 KG4W 🎹 CWops #2577
 KG4ZK 🎹 CWops #55
@@ -1637,7 +1638,6 @@ N1DC 🎹 CWops #1257
 N1DG 🎹 CWops #2
 N1EN 🎹 CWops #1247
 N1FG 🎹 CWops #2012
-N1IA 🎹 CWops #3611
 N1KB 🎹 CWops #3679
 N1KW 🎹 CWops #1022
 N1LN 🎹 CWops #1141
