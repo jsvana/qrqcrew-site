@@ -1,5 +1,5 @@
 # CWops Callsign Notes for Ham2K PoLo
-# Generated: 2026-02-05 17:51:02 UTC
+# Generated: 2026-02-05 17:54:13 UTC
 # Do not edit manually - this file is auto-generated
 
 AA0FO 🎹 MARSHALL R CWops #1532
@@ -194,9 +194,9 @@ AJ8B 🎹 WILLIAM S CWops #1567
 AK0A 🎹 KENNETH A CWops #3217
 AK4AO 🎹 DOUGLAS K CWops #2145
 AK4AT 🎹 John H CWops #2391
-AK4NY 🎹 CWops #1544
-AK4R 🎹 CWops #3711
-AK4SQ 🎹 CWops #1296
+AK4NY 🎹 Thomas E CWops #1544
+AK4R 🎹 Stephen D CWops #3711
+AK4SQ 🎹 DANIEL F CWops #1296
 AL1G 🎹 Corliss A CWops #2161
 AO1AAW 🎹 8th Antarctic CWops #714
 BA1RB 🎹 FAN CWops #564
@@ -251,9 +251,9 @@ DJ7AO 🎹 Stefan CWops #2254
 DJ7UC 🎹 Dirk CWops #2575
 DJ8GE 🎹 Günther "Gunter" CWops #2546
 DJ9BM 🎹 Volker CWops #3154
-DK1WI 🎹 CWops #1602
+DK1WI 🎹 Erhard "Ed" CWops #1602
 DK3RN 🎹 Peter CWops #3625
-DK3WW 🎹 CWops #2523
+DK3WW 🎹 Uwe CWops #2523
 DK4LX 🎹 Holger CWops #802
 DK4RW 🎹 Wolfgang CWops #3159
 DK5AX 🎹 Markus CWops #1812
@@ -2448,8 +2448,8 @@ VE2ZDX 🎹 Andre CWops #3671
 VE2ZM 🎹 Simon CWops #2144
 VE3ABN 🎹 William Leslie CWops #1701
 VE3AII 🎹 Canam Contest Club CWops #191
-VE3BXG 🎹 Mark CWops #2786
-VE3CEB 🎹 Gerhard CWops #1916
+VE3BXG 🎹 CWops #2786
+VE3CEB 🎹 CWops #1916
 VE3CT 🎹 Art CWops #2647
 VE3CX 🎹 Tom O CWops #1399
 VE3DZ 🎹 Yuri CWops #21
