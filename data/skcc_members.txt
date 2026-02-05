@@ -1,5 +1,5 @@
 # SKCC Callsign Notes for Ham2K PoLo
-# Generated: 2026-02-05 22:11:27 UTC
+# Generated: 2026-02-05 23:11:38 UTC
 # Do not edit manually - this file is auto-generated
 
 AA0AA 🔑 WILLIAM S SKCC #8576
@@ -25380,7 +25380,7 @@ W6IEE 🔑 Barclay J SKCC #3768
 W6IET 🔑 JOHN R SKCC #16414
 W6IO 🔑 DAR M SKCC #18933
 W6IQ 🔑 DONALD SKCC #14352
-W6IRA 🔑 GARY H SKCC #12393C
+W6IRA 🔑 GARY H SKCC #12393T
 W6IWI 🔑 HAROLD M SKCC #25069
 W6IZK 🔑 Wayne T SKCC #23932
 W6JAJ 🔑 JAMES A SKCC #19917
