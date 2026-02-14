@@ -1,5 +1,5 @@
 # QC Callsign Notes for Ham2K PoLo
-# Generated: 2026-02-14 02:01:18 UTC
+# Generated: 2026-02-14 03:01:30 UTC
 # Do not edit manually - this file is auto-generated
 
 AA0YY ⚓ MARK B QC #86
@@ -24,6 +24,7 @@ G5HOW ⚓ Gavin QC #101
 G5NLD ⚓ Dennis QC #102
 IK0IXI ⚓ FABIO QC #113
 IW2OGY ⚓ Luca QC #115
+JA1GZV ⚓ Moto Motoaki QC #129
 K0VBU ⚓ WILLIAM W QC #76
 K1JD ⚓ JOHN G QC #63
 K2EJT ⚓ Evan J QC #20
