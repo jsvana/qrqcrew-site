@@ -196,27 +196,6 @@
             font-size: 0.9rem;
         }
 
-        .loading {
-            text-align: center;
-            padding: 60px 20px;
-            color: var(--text-muted);
-        }
-
-        .loading-spinner {
-            display: inline-block;
-            width: 24px;
-            height: 24px;
-            border: 3px solid var(--border-light);
-            border-top-color: var(--slate-blue);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 16px;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
         .error {
             text-align: center;
             padding: 40px 20px;
@@ -384,10 +363,10 @@
 <body>
     <header>
         <div class="container">
-            <a href="index.html" class="back-link">← Back to Home</a>
+            <a href="index.html" class="back-link">&larr; Back to Home</a>
             <div class="header-content">
                 <h1>Member Roster</h1>
-                <span class="member-count" id="member-count"></span>
+                <span class="member-count">129 Members</span>
             </div>
         </div>
     </header>
@@ -400,218 +379,1056 @@
                 <span>Name</span>
                 <span>Joined</span>
             </div>
-            
-            <div class="roster-table" id="roster-table">
-                <div class="loading">
-                    <div class="loading-spinner"></div>
-                    <p>Loading roster...</p>
+
+            <div class="roster-table">
+                <div class="member-row founder">
+                    <span class="qc-number">QC #1</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/K4MW" target="_blank" rel="noopener">K4MW</a>
+                    </span>
+                    <span class="name">Peter Wildman<span class="founder-badge">Founder</span></span>
+                    <span class="join-date">Dec 10, 2025</span>
+                </div>
+                <div class="member-row founder">
+                    <span class="qc-number">QC #2</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/WN7JT" target="_blank" rel="noopener">WN7JT</a>
+                    </span>
+                    <span class="name">Gabe Donley<span class="founder-badge">Founder</span></span>
+                    <span class="join-date">Dec 10, 2025</span>
+                </div>
+                <div class="member-row founder">
+                    <span class="qc-number">QC #3</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/KI7QCF" target="_blank" rel="noopener">KI7QCF</a>
+                    </span>
+                    <span class="name">Forrest Stephenson<span class="founder-badge">Founder</span></span>
+                    <span class="join-date">Dec 10, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #4</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/K4FR" target="_blank" rel="noopener">K4FR</a>
+                    </span>
+                    <span class="name">Scott Fusilier</span>
+                    <span class="join-date">Dec 12, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #5</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/AC4NK" target="_blank" rel="noopener">AC4NK</a>
+                    </span>
+                    <span class="name">Ryan Banks</span>
+                    <span class="join-date">Dec 12, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #6</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/WI5D" target="_blank" rel="noopener">WI5D</a>
+                    </span>
+                    <span class="name">Steve Hawkins</span>
+                    <span class="join-date">Dec 12, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #7</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/KR8P" target="_blank" rel="noopener">KR8P</a>
+                    </span>
+                    <span class="name">Brad Hulce</span>
+                    <span class="join-date">Dec 12, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #8</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/KF6YAL" target="_blank" rel="noopener">KF6YAL</a>
+                    </span>
+                    <span class="name">Mike Boosalis</span>
+                    <span class="join-date">Dec 12, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #9</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/AJ7CM" target="_blank" rel="noopener">AJ7CM</a>
+                    </span>
+                    <span class="name">Andy Martin</span>
+                    <span class="join-date">Dec 12, 2025</span>
+                </div>
+                <div class="member-row tech-guy">
+                    <span class="qc-number">QC #10</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/W6JSV" target="_blank" rel="noopener">W6JSV</a>
+                    </span>
+                    <span class="name">Jay Vana<span class="tech-badge">Resident Computer Guy</span></span>
+                    <span class="join-date">Dec 12, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #11</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/K8CES" target="_blank" rel="noopener">K8CES</a>
+                    </span>
+                    <span class="name">Jesus Gonzalez</span>
+                    <span class="join-date">Dec 12, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #12</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/AI5BE" target="_blank" rel="noopener">AI5BE</a>
+                    </span>
+                    <span class="name">Tim Stinson</span>
+                    <span class="join-date">Dec 12, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #13</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/K5OHY" target="_blank" rel="noopener">K5OHY</a>
+                    </span>
+                    <span class="name">Tim Hale</span>
+                    <span class="join-date">Dec 12, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #14</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/N9HO" target="_blank" rel="noopener">N9HO</a>
+                    </span>
+                    <span class="name">Justin Rogers</span>
+                    <span class="join-date">Dec 12, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #15</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/W6PUG" target="_blank" rel="noopener">W6PUG</a>
+                    </span>
+                    <span class="name">Darin Dargatz</span>
+                    <span class="join-date">Dec 12, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #16</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/KE9BHN" target="_blank" rel="noopener">KE9BHN</a>
+                    </span>
+                    <span class="name">Paul Burley</span>
+                    <span class="join-date">Dec 12, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #17</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/AD7N" target="_blank" rel="noopener">AD7N</a>
+                    </span>
+                    <span class="name">Ben Steiner</span>
+                    <span class="join-date">Dec 12, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #18</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/KT0AA" target="_blank" rel="noopener">KT0AA</a>
+                    </span>
+                    <span class="name">Tony Nass</span>
+                    <span class="join-date">Dec 13, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #19</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/NA7DO" target="_blank" rel="noopener">NA7DO</a>
+                    </span>
+                    <span class="name">Aldo Mendoza</span>
+                    <span class="join-date">Dec 13, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #20</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/K2EJT" target="_blank" rel="noopener">K2EJT</a>
+                    </span>
+                    <span class="name">Evan Thorson</span>
+                    <span class="join-date">Dec 13, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #21</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/KO4TFE" target="_blank" rel="noopener">KO4TFE</a>
+                    </span>
+                    <span class="name">Jason Bishiop</span>
+                    <span class="join-date">Dec 13, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #22</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/VE1EM" target="_blank" rel="noopener">VE1EM</a>
+                    </span>
+                    <span class="name">Jesse Lawrence</span>
+                    <span class="join-date">Dec 13, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #23</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/WD5JR" target="_blank" rel="noopener">WD5JR</a>
+                    </span>
+                    <span class="name">Josiah Russell</span>
+                    <span class="join-date">Dec 13, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #24</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/KG5VNQ" target="_blank" rel="noopener">KG5VNQ</a>
+                    </span>
+                    <span class="name">Justin King</span>
+                    <span class="join-date">Dec 13, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #25</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/N6RUN" target="_blank" rel="noopener">N6RUN</a>
+                    </span>
+                    <span class="name">Saurabh Bhasin</span>
+                    <span class="join-date">Dec 13, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #26</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/KD7DUG" target="_blank" rel="noopener">KD7DUG</a>
+                    </span>
+                    <span class="name">Dugbo Rehder</span>
+                    <span class="join-date">Dec 13, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #27</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/VA4ADM" target="_blank" rel="noopener">VA4ADM</a>
+                    </span>
+                    <span class="name">Paul Shumarov</span>
+                    <span class="join-date">Dec 13, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #28</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/KM7COJ" target="_blank" rel="noopener">KM7COJ</a>
+                    </span>
+                    <span class="name">Joshua Earhart</span>
+                    <span class="join-date">Dec 13, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #29</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/KR4EBK" target="_blank" rel="noopener">KR4EBK</a>
+                    </span>
+                    <span class="name">Andrew Gajewski</span>
+                    <span class="join-date">Dec 13, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #30</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/KN3A" target="_blank" rel="noopener">KN3A</a>
+                    </span>
+                    <span class="name">Scott Lithgow</span>
+                    <span class="join-date">Dec 13, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #31</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/W7LHT" target="_blank" rel="noopener">W7LHT</a>
+                    </span>
+                    <span class="name">Zachary Milne</span>
+                    <span class="join-date">Dec 13, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #32</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/N9FZ" target="_blank" rel="noopener">N9FZ</a>
+                    </span>
+                    <span class="name">Cainan Whelchel</span>
+                    <span class="join-date">Dec 14, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #33</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/VE7SRF" target="_blank" rel="noopener">VE7SRF</a>
+                    </span>
+                    <span class="name">Sheldon Friesen</span>
+                    <span class="join-date">Dec 14, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #34</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/KD7J" target="_blank" rel="noopener">KD7J</a>
+                    </span>
+                    <span class="name">Jeffry Sampson</span>
+                    <span class="join-date">Dec 14, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #35</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/W1WC" target="_blank" rel="noopener">W1WC</a>
+                    </span>
+                    <span class="name">Bryan Tenniswood</span>
+                    <span class="join-date">Dec 13, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #36</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/KE8TBM" target="_blank" rel="noopener">KE8TBM</a>
+                    </span>
+                    <span class="name">Fred Heitman</span>
+                    <span class="join-date">Dec 14, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #37</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/KQ4DUX" target="_blank" rel="noopener">KQ4DUX</a>
+                    </span>
+                    <span class="name">Jay Hvidsten</span>
+                    <span class="join-date">Dec 14, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #38</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/KI5GTR" target="_blank" rel="noopener">KI5GTR</a>
+                    </span>
+                    <span class="name">Les Chalfant</span>
+                    <span class="join-date">Dec 14, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #39</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/KV8X" target="_blank" rel="noopener">KV8X</a>
+                    </span>
+                    <span class="name">Al Pepping</span>
+                    <span class="join-date">Dec 14, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #40</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/N4GO" target="_blank" rel="noopener">N4GO</a>
+                    </span>
+                    <span class="name">Jay Speck</span>
+                    <span class="join-date">Dec 14, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #41</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/K4FIR" target="_blank" rel="noopener">K4FIR</a>
+                    </span>
+                    <span class="name">Harris Vann</span>
+                    <span class="join-date">Dec 14, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #42</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/ND4K" target="_blank" rel="noopener">ND4K</a>
+                    </span>
+                    <span class="name">Dave Probst</span>
+                    <span class="join-date">Dec 15, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #43</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/N1XV" target="_blank" rel="noopener">N1XV</a>
+                    </span>
+                    <span class="name">Julia Diehl</span>
+                    <span class="join-date">Dec 15, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #44</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/KJ5CMP" target="_blank" rel="noopener">KJ5CMP</a>
+                    </span>
+                    <span class="name">Isaiah Russell</span>
+                    <span class="join-date">Dec 15, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #45</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/KK7QAS" target="_blank" rel="noopener">KK7QAS</a>
+                    </span>
+                    <span class="name">Josh Peterson</span>
+                    <span class="join-date">Dec 15, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #46</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/WB0RLJ" target="_blank" rel="noopener">WB0RLJ</a>
+                    </span>
+                    <span class="name">Jim Vaughan</span>
+                    <span class="join-date">Dec 15, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #47</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/WB4IT" target="_blank" rel="noopener">WB4IT</a>
+                    </span>
+                    <span class="name">Brian Byers</span>
+                    <span class="join-date">Dec 16, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #48</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/WJ0C" target="_blank" rel="noopener">WJ0C</a>
+                    </span>
+                    <span class="name">Steven Robbs</span>
+                    <span class="join-date">Dec 15, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #49</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/AE6Z" target="_blank" rel="noopener">AE6Z</a>
+                    </span>
+                    <span class="name">C.W. Said</span>
+                    <span class="join-date">Dec 16, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #50</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/KC0ZPS" target="_blank" rel="noopener">KC0ZPS</a>
+                    </span>
+                    <span class="name">Ron Kinney</span>
+                    <span class="join-date">Dec 17, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #51</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/NR4A" target="_blank" rel="noopener">NR4A</a>
+                    </span>
+                    <span class="name">Sam Davis</span>
+                    <span class="join-date">Dec 17, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #52</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/NN3E" target="_blank" rel="noopener">NN3E</a>
+                    </span>
+                    <span class="name">Kevin Kane</span>
+                    <span class="join-date">Dec 17, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #53</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/W5RZ" target="_blank" rel="noopener">W5RZ</a>
+                    </span>
+                    <span class="name">Dennis Schaefer</span>
+                    <span class="join-date">Dec 17, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #54</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/AK4MT" target="_blank" rel="noopener">AK4MT</a>
+                    </span>
+                    <span class="name">Michael Terry</span>
+                    <span class="join-date">Dec 17, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #55</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/WE5J" target="_blank" rel="noopener">WE5J</a>
+                    </span>
+                    <span class="name">Scott Taylor</span>
+                    <span class="join-date">Dec 18, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #56</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/W2OZB" target="_blank" rel="noopener">W2OZB</a>
+                    </span>
+                    <span class="name">Phil Bartash</span>
+                    <span class="join-date">Dec 18, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #57</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/W1VES" target="_blank" rel="noopener">W1VES</a>
+                    </span>
+                    <span class="name">Devon Moss</span>
+                    <span class="join-date">Dec 18, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #58</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/DF7TV" target="_blank" rel="noopener">DF7TV</a>
+                    </span>
+                    <span class="name">Thomas Martin</span>
+                    <span class="join-date">Dec 18, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #59</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/N4EWD" target="_blank" rel="noopener">N4EWD</a>
+                    </span>
+                    <span class="name">Kyle Dunaway</span>
+                    <span class="join-date">Dec 19, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #60</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/N1CCC" target="_blank" rel="noopener">N1CCC</a>
+                    </span>
+                    <span class="name">Daniel Gonshorek</span>
+                    <span class="join-date">Dec 19, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #61</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/K6AJ" target="_blank" rel="noopener">K6AJ</a>
+                    </span>
+                    <span class="name">Mike Kelley</span>
+                    <span class="join-date">Dec 20, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #62</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/KE2FUA" target="_blank" rel="noopener">KE2FUA</a>
+                    </span>
+                    <span class="name">Dan Little</span>
+                    <span class="join-date">Dec 20, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #63</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/K1JD" target="_blank" rel="noopener">K1JD</a>
+                    </span>
+                    <span class="name">John DePrimo</span>
+                    <span class="join-date">Dec 19, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #64</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/KQ4MVW" target="_blank" rel="noopener">KQ4MVW</a>
+                    </span>
+                    <span class="name">Marshall Stevens</span>
+                    <span class="join-date">Dec 20, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #65</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/KE8UEX" target="_blank" rel="noopener">KE8UEX</a>
+                    </span>
+                    <span class="name">Ram Seshan</span>
+                    <span class="join-date">Dec 21, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #66</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/KB7RYU" target="_blank" rel="noopener">KB7RYU</a>
+                    </span>
+                    <span class="name">Joel Steenis</span>
+                    <span class="join-date">Dec 21, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #67</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/WB4AQL" target="_blank" rel="noopener">WB4AQL</a>
+                    </span>
+                    <span class="name">Michael Wilke</span>
+                    <span class="join-date">Dec 21, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #68</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/NU1D" target="_blank" rel="noopener">NU1D</a>
+                    </span>
+                    <span class="name">Seth Jones</span>
+                    <span class="join-date">Dec 21, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #69</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/N8JMS" target="_blank" rel="noopener">N8JMS</a>
+                    </span>
+                    <span class="name">Justin Swain</span>
+                    <span class="join-date">Dec 21, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #70</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/N6HI" target="_blank" rel="noopener">N6HI</a>
+                    </span>
+                    <span class="name">John Rehak</span>
+                    <span class="join-date">Dec 21, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #71</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/DF7TR" target="_blank" rel="noopener">DF7TR</a>
+                    </span>
+                    <span class="name">Thomas Ratzke</span>
+                    <span class="join-date">Dec 23, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #72</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/NE5A" target="_blank" rel="noopener">NE5A</a>
+                    </span>
+                    <span class="name">George Randolph</span>
+                    <span class="join-date">Dec 24, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #73</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/N3JT" target="_blank" rel="noopener">N3JT</a>
+                    </span>
+                    <span class="name">Jim Talens</span>
+                    <span class="join-date">Dec 24, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #74</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/KV1I" target="_blank" rel="noopener">KV1I</a>
+                    </span>
+                    <span class="name">Imre Forro</span>
+                    <span class="join-date">Dec 25, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #75</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/K6TTA" target="_blank" rel="noopener">K6TTA</a>
+                    </span>
+                    <span class="name">Jeff Driskill</span>
+                    <span class="join-date">Dec 26, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #76</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/K0VBU" target="_blank" rel="noopener">K0VBU</a>
+                    </span>
+                    <span class="name">Bill Henderson</span>
+                    <span class="join-date">Dec 24, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #77</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/KN2D" target="_blank" rel="noopener">KN2D</a>
+                    </span>
+                    <span class="name">Ken Countess</span>
+                    <span class="join-date">Dec 26, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #78</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/K8DK" target="_blank" rel="noopener">K8DK</a>
+                    </span>
+                    <span class="name">Doug Kaherl</span>
+                    <span class="join-date">Dec 26, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #79</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/N2EC" target="_blank" rel="noopener">N2EC</a>
+                    </span>
+                    <span class="name">Ed Cabic</span>
+                    <span class="join-date">Dec 26, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #80</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/N2TNN" target="_blank" rel="noopener">N2TNN</a>
+                    </span>
+                    <span class="name">Dean Marzocca</span>
+                    <span class="join-date">Dec 26, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #81</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/K9ID" target="_blank" rel="noopener">K9ID</a>
+                    </span>
+                    <span class="name">Ron Kritzman</span>
+                    <span class="join-date">Dec 26, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #82</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/N4LSJ" target="_blank" rel="noopener">N4LSJ</a>
+                    </span>
+                    <span class="name">Thomas Glascock</span>
+                    <span class="join-date">Dec 27, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #83</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/K2MZ" target="_blank" rel="noopener">K2MZ</a>
+                    </span>
+                    <span class="name">Robert Zarges Jr.</span>
+                    <span class="join-date">Dec 27, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #84</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/NQ8J" target="_blank" rel="noopener">NQ8J</a>
+                    </span>
+                    <span class="name">Eric Bartlett</span>
+                    <span class="join-date">Dec 27, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #85</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/W2DON" target="_blank" rel="noopener">W2DON</a>
+                    </span>
+                    <span class="name">Don Reynolds</span>
+                    <span class="join-date">Dec 28, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #86</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/AA0YY" target="_blank" rel="noopener">AA0YY</a>
+                    </span>
+                    <span class="name">Mark Choate</span>
+                    <span class="join-date">Dec 29, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #87</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/N3VO" target="_blank" rel="noopener">N3VO</a>
+                    </span>
+                    <span class="name">Marcus Harton</span>
+                    <span class="join-date">Dec 29, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #88</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/WA9CW" target="_blank" rel="noopener">WA9CW</a>
+                    </span>
+                    <span class="name">Tom Waits</span>
+                    <span class="join-date">Dec 30, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #89</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/KI5DRY" target="_blank" rel="noopener">KI5DRY</a>
+                    </span>
+                    <span class="name">Larry Bartash</span>
+                    <span class="join-date">Dec 31, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #90</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/AB5M" target="_blank" rel="noopener">AB5M</a>
+                    </span>
+                    <span class="name">Scott Campbell</span>
+                    <span class="join-date">Dec 31, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #91</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/XE1AY" target="_blank" rel="noopener">XE1AY</a>
+                    </span>
+                    <span class="name">Ismael Martinez Vizcarra</span>
+                    <span class="join-date">Dec 31, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #92</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/G4BFG" target="_blank" rel="noopener">G4BFG</a>
+                    </span>
+                    <span class="name">Ciemon Dunville</span>
+                    <span class="join-date">Dec 31, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #93</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/VE7OSH" target="_blank" rel="noopener">VE7OSH</a>
+                    </span>
+                    <span class="name">Amrit Derhgawen</span>
+                    <span class="join-date">Dec 28, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #94</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/N7CQR" target="_blank" rel="noopener">N7CQR</a>
+                    </span>
+                    <span class="name">Dan Presley</span>
+                    <span class="join-date">Jan 1, 2026</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #95</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/DD1LD" target="_blank" rel="noopener">DD1LD</a>
+                    </span>
+                    <span class="name">Dzianis Lukashevich</span>
+                    <span class="join-date">Jan 1, 2026</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #96</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/KC1UBH" target="_blank" rel="noopener">KC1UBH</a>
+                    </span>
+                    <span class="name">Matt Yershov</span>
+                    <span class="join-date">Jan 2, 2026</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #97</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/W4DHW" target="_blank" rel="noopener">W4DHW</a>
+                    </span>
+                    <span class="name">Dave Wheeler</span>
+                    <span class="join-date">Dec 29, 2025</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #98</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/KR4FLM" target="_blank" rel="noopener">KR4FLM</a>
+                    </span>
+                    <span class="name">Hunter York</span>
+                    <span class="join-date">Jan 3, 2026</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #99</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/DK3RN" target="_blank" rel="noopener">DK3RN</a>
+                    </span>
+                    <span class="name">Peter Kern</span>
+                    <span class="join-date">Jan 4, 2026</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #100</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/K9KJ" target="_blank" rel="noopener">K9KJ</a>
+                    </span>
+                    <span class="name">TJ Johnson</span>
+                    <span class="join-date">Jan 4, 2026</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #101</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/G5HOW" target="_blank" rel="noopener">G5HOW</a>
+                    </span>
+                    <span class="name">Gavin Howling</span>
+                    <span class="join-date">Jan 5, 2026</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #102</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/G5NLD" target="_blank" rel="noopener">G5NLD</a>
+                    </span>
+                    <span class="name">Dennis van Dijk</span>
+                    <span class="join-date">Jan 6, 2026</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #103</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/W0CCA" target="_blank" rel="noopener">W0CCA</a>
+                    </span>
+                    <span class="name">Cap Allen</span>
+                    <span class="join-date">Jan 6, 2026</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #104</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/OE3KME" target="_blank" rel="noopener">OE3KME</a>
+                    </span>
+                    <span class="name">Martin Kuehnl</span>
+                    <span class="join-date">Jan 7, 2026</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #105</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/G0POT" target="_blank" rel="noopener">G0POT</a>
+                    </span>
+                    <span class="name">Michael Sansom</span>
+                    <span class="join-date">Jan 7, 2026</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #106</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/W9RNY" target="_blank" rel="noopener">W9RNY</a>
+                    </span>
+                    <span class="name">Mike Mayberry</span>
+                    <span class="join-date">Jan 11, 2026</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #107</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/N7BUH" target="_blank" rel="noopener">N7BUH</a>
+                    </span>
+                    <span class="name">Dan Dunlap</span>
+                    <span class="join-date">Jan 11, 2026</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #108</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/KM7ANM" target="_blank" rel="noopener">KM7ANM</a>
+                    </span>
+                    <span class="name">Devan Grose</span>
+                    <span class="join-date">Jan 11, 2026</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #109</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/VA3EKR" target="_blank" rel="noopener">VA3EKR</a>
+                    </span>
+                    <span class="name">Scott Ralph</span>
+                    <span class="join-date">Jan 15, 2026</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #110</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/N4RLD" target="_blank" rel="noopener">N4RLD</a>
+                    </span>
+                    <span class="name">Rick Dingler</span>
+                    <span class="join-date">Jan 16, 2026</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #111</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/G4KKU" target="_blank" rel="noopener">G4KKU</a>
+                    </span>
+                    <span class="name">Andy Imianowski</span>
+                    <span class="join-date">Jan 17, 2026</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #112</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/WB0GKH" target="_blank" rel="noopener">WB0GKH</a>
+                    </span>
+                    <span class="name">Mitch Schultz</span>
+                    <span class="join-date">Jan 18, 2026</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #113</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/IK0IXI" target="_blank" rel="noopener">IK0IXI</a>
+                    </span>
+                    <span class="name">Fabio Bonucci</span>
+                    <span class="join-date">Jan 18, 2026</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #114</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/N3ADP" target="_blank" rel="noopener">N3ADP</a>
+                    </span>
+                    <span class="name">Scott Mc Nutt</span>
+                    <span class="join-date">Jan 18, 2026</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #115</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/IW2OGY" target="_blank" rel="noopener">IW2OGY</a>
+                    </span>
+                    <span class="name">Luca Vergottini</span>
+                    <span class="join-date">Jan 19, 2026</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #116</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/NB5E" target="_blank" rel="noopener">NB5E</a>
+                    </span>
+                    <span class="name">Brandon White</span>
+                    <span class="join-date">Jan 24, 2026</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #117</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/KE0M" target="_blank" rel="noopener">KE0M</a>
+                    </span>
+                    <span class="name">Joe Jennings</span>
+                    <span class="join-date">Jan 27, 2026</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #118</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/AJ1DM" target="_blank" rel="noopener">AJ1DM</a>
+                    </span>
+                    <span class="name">John Merkel</span>
+                    <span class="join-date">Jan 28, 2026</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #119</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/ZA1RR" target="_blank" rel="noopener">ZA1RR</a>
+                    </span>
+                    <span class="name">Miri Elezi</span>
+                    <span class="join-date">Jan 30, 2026</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #120</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/K5ZM" target="_blank" rel="noopener">K5ZM</a>
+                    </span>
+                    <span class="name">Ian Parsons</span>
+                    <span class="join-date">Jan 31, 2026</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #121</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/DJ5CW" target="_blank" rel="noopener">DJ5CW</a>
+                    </span>
+                    <span class="name">Fabian Kurz</span>
+                    <span class="join-date">Feb 1, 2026</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #122</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/KQ4MHE" target="_blank" rel="noopener">KQ4MHE</a>
+                    </span>
+                    <span class="name">Mike Cifelli</span>
+                    <span class="join-date">Feb 4, 2026</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #123</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/F8DGY" target="_blank" rel="noopener">F8DGY</a>
+                    </span>
+                    <span class="name">Christophe Vigliani</span>
+                    <span class="join-date">Feb 4, 2026</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #124</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/M0XCV" target="_blank" rel="noopener">M0XCV</a>
+                    </span>
+                    <span class="name">Charlotte Huyton</span>
+                    <span class="join-date">Feb 8, 2026</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #125</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/W6ZBA" target="_blank" rel="noopener">W6ZBA</a>
+                    </span>
+                    <span class="name">Matt Scholz</span>
+                    <span class="join-date">Feb 8, 2026</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #126</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/WA6RSV" target="_blank" rel="noopener">WA6RSV</a>
+                    </span>
+                    <span class="name">Pablo Lewin</span>
+                    <span class="join-date">Feb 10, 2026</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #127</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/N2DA" target="_blank" rel="noopener">N2DA</a>
+                    </span>
+                    <span class="name">Craig Szczutkowski</span>
+                    <span class="join-date">Feb 10, 2026</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #128</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/WZ2J" target="_blank" rel="noopener">WZ2J</a>
+                    </span>
+                    <span class="name">Vinicio Jacobo</span>
+                    <span class="join-date">Feb 9, 2026</span>
+                </div>
+                <div class="member-row ">
+                    <span class="qc-number">QC #129</span>
+                    <span class="callsign">
+                        <a href="https://www.qrz.com/db/JA1GZV" target="_blank" rel="noopener">JA1GZV</a>
+                    </span>
+                    <span class="name">Moto Uotome</span>
+                    <span class="join-date">Feb 14, 2026</span>
                 </div>
             </div>
 
             <div class="roster-footer">
                 <p>Want to join the crew? <a href="index.html#membership">Learn how to become a member</a></p>
-                <p class="last-updated" id="last-updated"></p>
+                <p class="last-updated">Last updated: February 16, 2026 at 01:20 UTC</p>
             </div>
         </div>
     </main>
 
     <footer>
         <div class="container">
-            <div class="footer-morse">−·−· −−·− / −−·− −·−·</</div>
+            <div class="footer-morse">&minus;&middot;&minus;&middot; &minus;&minus;&middot;&minus; / &minus;&minus;&middot;&minus; &minus;&middot;&minus;&middot;</div>
             <p class="footer-text">
-                QRQ Crew Club © 2025 · <a href="index.html">Home</a>
+                QRQ Crew Club &copy; 2025 &middot; <a href="index.html">Home</a>
             </p>
         </div>
     </footer>
-
-    <script>
-        // Published Google Sheet CSV URL
-        const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRBfNWrtgvUxTJQL96aK4g7ctZZ-Z572mBEbsscarGQWrbHg66yfxf-Jxw-bZ1ke7KX0zhJk6nUFWhL/pub?output=csv';
-        
-        // CORS proxies to try (in order)
-        const CORS_PROXIES = [
-            'https://corsproxy.io/?',
-            'https://api.allorigins.win/raw?url=',
-            'https://cors-anywhere.herokuapp.com/'
-        ];
-        
-        // Fetch roster using CORS proxy
-        async function fetchRoster() {
-            let lastError;
-            
-            for (const proxy of CORS_PROXIES) {
-                try {
-                    const url = proxy + encodeURIComponent(SHEET_CSV_URL);
-                    const response = await fetch(url);
-                    
-                    if (!response.ok) continue;
-                    
-                    const csvText = await response.text();
-                    const members = parseCSV(csvText);
-                    
-                    if (members.length > 0) {
-                        renderRoster(members);
-                        return;
-                    }
-                } catch (error) {
-                    lastError = error;
-                    console.log(`Proxy ${proxy} failed, trying next...`);
-                }
-            }
-            
-            console.error('All proxies failed:', lastError);
-            showError();
-        }
-
-        // Parse CSV text into array of member objects
-        function parseCSV(csvText) {
-            const lines = csvText.split('\n');
-            const members = [];
-            
-            // Find the header row (contains "Callsign")
-            let headerIndex = -1;
-            for (let i = 0; i < lines.length; i++) {
-                if (lines[i].includes('Callsign')) {
-                    headerIndex = i;
-                    break;
-                }
-            }
-            
-            if (headerIndex === -1) return members;
-            
-            // Parse data rows after header
-            for (let i = headerIndex + 1; i < lines.length; i++) {
-                const row = parseCSVLine(lines[i]);
-                
-                // Skip empty rows
-                if (!row[0] || row[0].trim() === '') continue;
-                
-                const member = {
-                    callsign: row[0]?.trim() || '',
-                    name: row[1]?.trim() || '',
-                    joinDate: row[2]?.trim() || '',
-                    qcNumber: parseInt(row[3]) || 0
-                };
-                
-                if (member.callsign && member.qcNumber) {
-                    members.push(member);
-                }
-            }
-            
-            // Sort by QC number
-            members.sort((a, b) => a.qcNumber - b.qcNumber);
-            
-            return members;
-        }
-
-        // Parse a single CSV line (handles quoted fields)
-        function parseCSVLine(line) {
-            const result = [];
-            let current = '';
-            let inQuotes = false;
-            
-            for (let i = 0; i < line.length; i++) {
-                const char = line[i];
-                
-                if (char === '"') {
-                    inQuotes = !inQuotes;
-                } else if (char === ',' && !inQuotes) {
-                    result.push(current);
-                    current = '';
-                } else {
-                    current += char;
-                }
-            }
-            result.push(current);
-            
-            return result;
-        }
-
-        // Format date string
-        function formatDate(dateStr) {
-            if (!dateStr) return '';
-            
-            // Try parsing MM/DD/YYYY format
-            const parts = dateStr.split('/');
-            if (parts.length === 3) {
-                const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
-                               'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-                const month = parseInt(parts[0]) - 1;
-                const day = parseInt(parts[1]);
-                const year = parts[2];
-                
-                if (month >= 0 && month < 12) {
-                    return `${months[month]} ${day}, ${year}`;
-                }
-            }
-            
-            return dateStr;
-        }
-
-        // Render the roster table
-        function renderRoster(members) {
-            const table = document.getElementById('roster-table');
-            const countEl = document.getElementById('member-count');
-            
-            if (members.length === 0) {
-                showError();
-                return;
-            }
-            
-            countEl.textContent = `${members.length} Member${members.length !== 1 ? 's' : ''}`;
-            
-            let html = '';
-            
-            members.forEach(member => {
-                const isFounder = member.qcNumber <= 3;
-                const isTechGuy = member.callsign.toUpperCase() === 'W6JSV';
-
-                let rowClass = '';
-                let badge = '';
-
-                if (isFounder) {
-                    rowClass = 'founder';
-                    badge = '<span class="founder-badge">Founder</span>';
-                } else if (isTechGuy) {
-                    rowClass = 'tech-guy';
-                    badge = '<span class="tech-badge">Resident Computer Guy</span>';
-                }
-
-                html += `
-                    <div class="member-row ${rowClass}">
-                        <span class="qc-number">QC #${member.qcNumber}</span>
-                        <span class="callsign">
-                            <a href="https://www.qrz.com/db/${member.callsign}" target="_blank" rel="noopener">${member.callsign}</a>
-                        </span>
-                        <span class="name">${member.name}${badge}</span>
-                        <span class="join-date">${formatDate(member.joinDate)}</span>
-                    </div>
-                `;
-            });
-            
-            table.innerHTML = html;
-            
-            // Update timestamp
-            const now = new Date();
-            document.getElementById('last-updated').textContent = 
-                `Last updated: ${now.toLocaleDateString()} at ${now.toLocaleTimeString()}`;
-        }
-
-        // Show error message
-        function showError() {
-            const table = document.getElementById('roster-table');
-            table.innerHTML = `
-                <div class="error">
-                    <p>Unable to load roster data.</p>
-                    <p style="margin-top: 12px; font-size: 0.85rem;">
-                        The spreadsheet may need to be <a href="https://support.google.com/docs/answer/183965" target="_blank" rel="noopener">published to the web</a>.
-                    </p>
-                </div>
-            `;
-        }
-
-        // Load roster on page load
-        fetchRoster();
-    </script>
 </body>
 </html>
