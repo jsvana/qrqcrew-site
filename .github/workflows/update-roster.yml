@@ -1,5 +1,7 @@
 name: Update Roster
 on:
+  push:
+    branches: [static-roster]  # TODO: remove before merging to main
   schedule:
     - cron: '0 */6 * * *'
   workflow_dispatch:
