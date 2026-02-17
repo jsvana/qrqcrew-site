@@ -705,6 +705,7 @@
                         result[match[1].toUpperCase()] = parseInt(match[2], 10);
                     }
                 }
+                console.warn('[debug] parseMembers: ' + Object.keys(result).length + ' members, first 5: ' + Object.keys(result).slice(0, 5).join(', '));
                 return result;
             }
 
@@ -1014,6 +1015,7 @@
                     .then(function (data) {
                         var spots = data.spots || [];
                         var matched = [];
+                        console.warn('[debug] fetchSpots: API returned ' + spots.length + ' spots, members loaded: ' + Object.keys(members).length);
 
                         for (var i = 0; i < spots.length; i++) {
                             var call = (spots[i].callsign || '').toUpperCase();
@@ -1037,6 +1039,7 @@
                             return new Date(b.timestamp) - new Date(a.timestamp);
                         });
 
+                        console.warn('[debug] fetchSpots: matched ' + matched.length + ' spots' + (matched.length > 0 ? ' (' + matched[0].callsign + '...)' : ''));
                         allSpots = matched;
                         renderSpots();
 
