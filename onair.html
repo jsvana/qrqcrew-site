@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Who's On the Air | QRQ Crew Club</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #1B3A57;
+            --navy-dark: #132A40;
+            --slate-blue: #4A7C9B;
+            --light-blue: #7BA3BE;
+            --cream: #FDFBF7;
+            --white: #FFFFFF;
+            --text-dark: #2C3E50;
+            --text-muted: #5D6D7E;
+            --border-light: #D5DFE5;
+            --green: #5D8A66;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans Pro', Georgia, serif;
+            background-color: var(--cream);
+            color: var(--text-dark);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        header {
+            background: var(--white);
+            border-bottom: 3px solid var(--navy);
+            padding: 30px 0;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 16px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--slate-blue);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--navy);
+        }
+
+        h1 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--navy);
+        }
+
+        .status-line {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--green);
+            display: inline-block;
+        }
+
+        .status-dot.loading {
+            background: var(--slate-blue);
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        .status-dot.error {
+            background: #A65D5D;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        main {
+            padding: 40px 0 80px;
+        }
+
+        .section-intro {
+            text-align: center;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 32px;
+            font-size: 1.05rem;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .mode-filters {
+            display: flex;
+            gap: 0;
+        }
+
+        .mode-filter {
+            padding: 8px 16px;
+            font-size: 0.85rem;
+            font-family: 'Source Sans Pro', Georgia, serif;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            background: var(--white);
+            border: 1px solid var(--border-light);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .mode-filter:first-child {
+            border-right: none;
+        }
+
+        .mode-filter:last-child {
+            border-left: none;
+        }
+
+        .mode-filter.active {
+            background: var(--navy);
+            border-color: var(--navy);
+            color: var(--white);
+        }
+
+        .mode-filter:hover:not(.active) {
+            background: rgba(74, 124, 155, 0.05);
+            color: var(--navy);
+        }
+
+        .refresh-btn {
+            padding: 8px 16px;
+            font-size: 0.85rem;
+            font-family: 'Source Sans Pro', Georgia, serif;
+            background: var(--white);
+            border: 1px solid var(--border-light);
+            color: var(--slate-blue);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .refresh-btn:hover {
+            color: var(--navy);
+            border-color: var(--navy);
+        }
+
+        .refresh-btn.refreshing {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .spot-header {
+            display: grid;
+            grid-template-columns: 100px 100px 100px 80px 70px 1fr;
+            gap: 16px;
+            padding: 16px 20px;
+            background: var(--navy);
+            color: var(--white);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .spot-table {
+            background: var(--white);
+            border: 1px solid var(--border-light);
+            border-top: none;
+        }
+
+        .spot-row {
+            display: grid;
+            grid-template-columns: 100px 100px 100px 80px 70px 1fr;
+            gap: 16px;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-light);
+            align-items: center;
+            transition: background 0.2s ease;
+        }
+
+        .spot-row:hover {
+            background: rgba(74, 124, 155, 0.05);
+        }
+
+        .spot-row:last-child {
+            border-bottom: none;
+        }
+
+        .spot-callsign {
+            font-weight: 600;
+            color: var(--navy);
+        }
+
+        .spot-callsign a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .spot-callsign a:hover {
+            color: var(--slate-blue);
+        }
+
+        .spot-qc {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 600;
+            color: var(--slate-blue);
+            font-size: 0.9rem;
+        }
+
+        .spot-freq {
+            font-variant-numeric: tabular-nums;
+        }
+
+        .spot-band {
+            display: inline-block;
+            background: var(--navy);
+            color: var(--white);
+            font-weight: 700;
+            font-size: 0.8rem;
+            padding: 2px 8px;
+        }
+
+        .spot-snr {
+            font-variant-numeric: tabular-nums;
+        }
+
+        .spot-time {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .empty-state, .loading-state, .error-state {
+            text-align: center;
+            padding: 60px 20px;
+            background: var(--white);
+            border: 1px solid var(--border-light);
+        }
+
+        .empty-state p, .loading-state p, .error-state p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        .empty-state .empty-icon {
+            font-size: 2rem;
+            margin-bottom: 16px;
+            opacity: 0.4;
+        }
+
+        .spot-count {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .onair-footer {
+            margin-top: 40px;
+            text-align: center;
+            padding: 24px;
+            background: var(--white);
+            border: 1px solid var(--border-light);
+        }
+
+        .onair-footer p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+        }
+
+        .onair-footer a {
+            color: var(--slate-blue);
+            text-decoration: none;
+        }
+
+        .onair-footer a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            background: var(--navy);
+            color: var(--white);
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        .footer-text {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        .footer-text a {
+            color: var(--light-blue);
+            text-decoration: none;
+        }
+
+        .footer-text a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 700px) {
+            .container {
+                padding: 0 16px;
+            }
+
+            .spot-header {
+                display: none;
+            }
+
+            .spot-table {
+                border: none;
+                background: transparent;
+            }
+
+            .spot-row {
+                display: block;
+                background: var(--white);
+                border: 1px solid var(--border-light);
+                padding: 16px;
+                margin-bottom: 12px;
+            }
+
+            .spot-row:hover {
+                background: var(--white);
+            }
+
+            .spot-callsign {
+                display: block;
+                font-size: 1.25rem;
+                margin-bottom: 4px;
+            }
+
+            .spot-qc {
+                display: block;
+                margin-bottom: 8px;
+            }
+
+            .spot-freq {
+                display: inline;
+            }
+
+            .spot-freq::after {
+                content: ' \b7 ';
+                color: var(--border-light);
+            }
+
+            .spot-band {
+                display: inline;
+                margin-right: 8px;
+            }
+
+            .spot-snr {
+                display: inline;
+            }
+
+            .spot-snr::before {
+                content: 'SNR ';
+                color: var(--text-muted);
+                font-size: 0.8rem;
+            }
+
+            .spot-time {
+                display: block;
+                font-size: 0.85rem;
+                margin-top: 8px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .mode-filters {
+                justify-content: stretch;
+            }
+
+            .mode-filter {
+                flex: 1;
+                text-align: center;
+            }
+
+            .onair-footer {
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="index.html" class="back-link">&larr; Back to Home</a>
+            <div class="header-content">
+                <h1>Who's On the Air</h1>
+                <span class="status-line" id="status">
+                    <span class="status-dot loading" id="status-dot"></span>
+                    <span id="status-text">Loading&hellip;</span>
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <p class="section-intro">QRQ Crew members recently spotted on the air by the Reverse Beacon Network. Updates every 60 seconds.</p>
+
+            <div class="controls">
+                <div class="mode-filters">
+                    <button class="mode-filter active" data-mode="all">All Modes</button>
+                    <button class="mode-filter" data-mode="CW">CW</button>
+                    <button class="mode-filter" data-mode="other">Other</button>
+                </div>
+                <button class="refresh-btn" id="refresh-btn">Refresh Now</button>
+            </div>
+
+            <div id="spot-count" class="spot-count"></div>
+
+            <div id="results"></div>
+
+            <div class="onair-footer">
+                <p>Spot data from the <a href="https://www.reversebeacon.net/" target="_blank" rel="noopener">Reverse Beacon Network</a> via <a href="https://vailrerbn.com/" target="_blank" rel="noopener">Vail ReRBN</a></p>
+                <p>Member list from <a href="roster.html">club roster</a></p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-morse">&minus;&middot;&minus;&middot; &minus;&minus;&middot;&minus; / &minus;&minus;&middot;&minus; &minus;&middot;&minus;&middot;</div>
+            <p class="footer-text">
+                QRQ Crew Club &copy; 2025 &middot; <a href="index.html">Home</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        (function () {
+            var MEMBERS_URL = 'https://qrqcrew.club/members.txt';
+            var SPOTS_URL = 'https://vailrerbn.com/api/v1/spots';
+            var REFRESH_INTERVAL = 60000;
+
+            var members = {};
+            var allSpots = [];
+            var activeMode = 'all';
+            var refreshTimer = null;
+
+            var resultsEl = document.getElementById('results');
+            var statusDot = document.getElementById('status-dot');
+            var statusText = document.getElementById('status-text');
+            var spotCountEl = document.getElementById('spot-count');
+            var refreshBtn = document.getElementById('refresh-btn');
+
+            function setStatus(state, text) {
+                statusDot.className = 'status-dot' + (state !== 'ok' ? ' ' + state : '');
+                statusText.textContent = text;
+            }
+
+            function parseMembers(text) {
+                var result = {};
+                var lines = text.split('\n');
+                for (var i = 0; i < lines.length; i++) {
+                    var line = lines[i].trim();
+                    if (!line || line.charAt(0) === '#') continue;
+                    var match = line.match(/^(\S+)\s.*#(\d+)/);
+                    if (match) {
+                        result[match[1].toUpperCase()] = parseInt(match[2], 10);
+                    }
+                }
+                return result;
+            }
+
+            function formatTime(ts) {
+                var d = new Date(ts);
+                var now = new Date();
+                var diffMs = now - d;
+                var diffMin = Math.floor(diffMs / 60000);
+
+                if (diffMin < 1) return 'just now';
+                if (diffMin < 60) return diffMin + 'm ago';
+
+                var hours = d.getUTCHours().toString().padStart(2, '0');
+                var mins = d.getUTCMinutes().toString().padStart(2, '0');
+                return hours + ':' + mins + 'z';
+            }
+
+            function formatFreq(khz) {
+                return khz.toFixed(1);
+            }
+
+            function freqToBand(khz) {
+                if (khz >= 1800 && khz <= 2000) return '160m';
+                if (khz >= 3500 && khz <= 4000) return '80m';
+                if (khz >= 5330 && khz <= 5410) return '60m';
+                if (khz >= 7000 && khz <= 7300) return '40m';
+                if (khz >= 10100 && khz <= 10150) return '30m';
+                if (khz >= 14000 && khz <= 14350) return '20m';
+                if (khz >= 18068 && khz <= 18168) return '17m';
+                if (khz >= 21000 && khz <= 21450) return '15m';
+                if (khz >= 24890 && khz <= 24990) return '12m';
+                if (khz >= 28000 && khz <= 29700) return '10m';
+                if (khz >= 50000 && khz <= 54000) return '6m';
+                return '';
+            }
+
+            function renderSpots() {
+                var filtered = allSpots;
+                if (activeMode === 'CW') {
+                    filtered = allSpots.filter(function (s) { return s.mode === 'CW'; });
+                } else if (activeMode === 'other') {
+                    filtered = allSpots.filter(function (s) { return s.mode !== 'CW'; });
+                }
+
+                if (filtered.length === 0) {
+                    resultsEl.innerHTML =
+                        '<div class="empty-state">' +
+                        '<div class="empty-icon">&#x2301;</div>' +
+                        '<p>No QRQ Crew members spotted in the last hour.</p>' +
+                        '</div>';
+                    spotCountEl.textContent = '';
+                    return;
+                }
+
+                var memberWord = filtered.length === 1 ? 'spot' : 'spots';
+                var uniqueCallsigns = {};
+                for (var i = 0; i < filtered.length; i++) {
+                    uniqueCallsigns[filtered[i].callsign] = true;
+                }
+                var uniqueCount = Object.keys(uniqueCallsigns).length;
+                var memberLabel = uniqueCount === 1 ? 'member' : 'members';
+                spotCountEl.textContent = filtered.length + ' ' + memberWord + ' from ' + uniqueCount + ' ' + memberLabel;
+
+                var html =
+                    '<div class="spot-header">' +
+                    '<span>Callsign</span>' +
+                    '<span>QC #</span>' +
+                    '<span>Freq (kHz)</span>' +
+                    '<span>Band</span>' +
+                    '<span>SNR</span>' +
+                    '<span>Spotted</span>' +
+                    '</div>' +
+                    '<div class="spot-table">';
+
+                for (var j = 0; j < filtered.length; j++) {
+                    var s = filtered[j];
+                    var band = s.band || freqToBand(s.frequency);
+                    var snr = s.snr != null ? s.snr + ' dB' : '&mdash;';
+
+                    html +=
+                        '<div class="spot-row">' +
+                        '<span class="spot-callsign"><a href="https://www.qrz.com/db/' + s.callsign + '" target="_blank" rel="noopener">' + s.callsign + '</a></span>' +
+                        '<span class="spot-qc">QC #' + s.qcNumber + '</span>' +
+                        '<span class="spot-freq">' + formatFreq(s.frequency) + '</span>' +
+                        '<span>' + (band ? '<span class="spot-band">' + band + '</span>' : '&mdash;') + '</span>' +
+                        '<span class="spot-snr">' + snr + '</span>' +
+                        '<span class="spot-time">' + formatTime(s.timestamp) + '</span>' +
+                        '</div>';
+                }
+
+                html += '</div>';
+                resultsEl.innerHTML = html;
+            }
+
+            function fetchSpots() {
+                setStatus('loading', 'Updating\u2026');
+                refreshBtn.classList.add('refreshing');
+
+                var url = SPOTS_URL + '?limit=1000';
+                fetch(url)
+                    .then(function (res) {
+                        if (!res.ok) throw new Error('API returned ' + res.status);
+                        return res.json();
+                    })
+                    .then(function (data) {
+                        var spots = data.spots || [];
+                        var matched = [];
+
+                        for (var i = 0; i < spots.length; i++) {
+                            var call = (spots[i].callsign || '').toUpperCase();
+                            if (members[call] != null) {
+                                matched.push({
+                                    callsign: call,
+                                    qcNumber: members[call],
+                                    frequency: spots[i].frequency,
+                                    band: spots[i].band || '',
+                                    mode: spots[i].mode || '',
+                                    snr: spots[i].snr,
+                                    timestamp: spots[i].timestamp
+                                });
+                            }
+                        }
+
+                        matched.sort(function (a, b) {
+                            return new Date(b.timestamp) - new Date(a.timestamp);
+                        });
+
+                        allSpots = matched;
+                        renderSpots();
+
+                        var now = new Date();
+                        var h = now.getUTCHours().toString().padStart(2, '0');
+                        var m = now.getUTCMinutes().toString().padStart(2, '0');
+                        setStatus('ok', 'Updated ' + h + ':' + m + 'z');
+                    })
+                    .catch(function (err) {
+                        console.error('Failed to fetch spots:', err);
+                        if (allSpots.length === 0) {
+                            resultsEl.innerHTML =
+                                '<div class="error-state">' +
+                                '<p>Unable to load spot data. <a href="javascript:void(0)" onclick="window.__retryFetch()">Try again</a></p>' +
+                                '</div>';
+                        }
+                        setStatus('error', 'Update failed');
+                    })
+                    .finally(function () {
+                        refreshBtn.classList.remove('refreshing');
+                    });
+            }
+
+            window.__retryFetch = function () {
+                fetchSpots();
+            };
+
+            function init() {
+                setStatus('loading', 'Loading members\u2026');
+                resultsEl.innerHTML = '<div class="loading-state"><p>Loading\u2026</p></div>';
+
+                fetch(MEMBERS_URL)
+                    .then(function (res) {
+                        if (!res.ok) throw new Error('Members fetch failed: ' + res.status);
+                        return res.text();
+                    })
+                    .then(function (text) {
+                        members = parseMembers(text);
+                        fetchSpots();
+                        refreshTimer = setInterval(fetchSpots, REFRESH_INTERVAL);
+                    })
+                    .catch(function (err) {
+                        console.error('Failed to load members:', err);
+                        setStatus('error', 'Failed to load members');
+                        resultsEl.innerHTML =
+                            '<div class="error-state">' +
+                            '<p>Unable to load member list. <a href="javascript:void(0)" onclick="location.reload()">Reload page</a></p>' +
+                            '</div>';
+                    });
+            }
+
+            // Mode filter buttons
+            var filterBtns = document.querySelectorAll('.mode-filter');
+            for (var i = 0; i < filterBtns.length; i++) {
+                filterBtns[i].addEventListener('click', function () {
+                    for (var j = 0; j < filterBtns.length; j++) {
+                        filterBtns[j].classList.remove('active');
+                    }
+                    this.classList.add('active');
+                    activeMode = this.getAttribute('data-mode');
+                    renderSpots();
+                });
+            }
+
+            // Refresh button
+            refreshBtn.addEventListener('click', function () {
+                if (refreshBtn.classList.contains('refreshing')) return;
+                clearInterval(refreshTimer);
+                fetchSpots();
+                refreshTimer = setInterval(fetchSpots, REFRESH_INTERVAL);
+            });
+
+            init();
+        })();
+    </script>
+</body>
+</html>
