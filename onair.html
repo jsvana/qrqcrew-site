@@ -187,68 +187,6 @@
             cursor: not-allowed;
         }
 
-        .spot-header {
-            display: grid;
-            grid-template-columns: 100px 100px 100px 80px 70px 1fr;
-            gap: 16px;
-            padding: 16px 20px;
-            background: var(--navy);
-            color: var(--white);
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-        }
-
-        .spot-table {
-            background: var(--white);
-            border: 1px solid var(--border-light);
-            border-top: none;
-        }
-
-        .spot-row {
-            display: grid;
-            grid-template-columns: 100px 100px 100px 80px 70px 1fr;
-            gap: 16px;
-            padding: 16px 20px;
-            border-bottom: 1px solid var(--border-light);
-            align-items: center;
-            transition: background 0.2s ease;
-        }
-
-        .spot-row:hover {
-            background: rgba(74, 124, 155, 0.05);
-        }
-
-        .spot-row:last-child {
-            border-bottom: none;
-        }
-
-        .spot-callsign {
-            font-weight: 600;
-            color: var(--navy);
-        }
-
-        .spot-callsign a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        .spot-callsign a:hover {
-            color: var(--slate-blue);
-        }
-
-        .spot-qc {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-weight: 600;
-            color: var(--slate-blue);
-            font-size: 0.9rem;
-        }
-
-        .spot-freq {
-            font-variant-numeric: tabular-nums;
-        }
-
         .spot-band {
             display: inline-block;
             background: var(--navy);
@@ -256,15 +194,6 @@
             font-weight: 700;
             font-size: 0.8rem;
             padding: 2px 8px;
-        }
-
-        .spot-snr {
-            font-variant-numeric: tabular-nums;
-        }
-
-        .spot-time {
-            color: var(--text-muted);
-            font-size: 0.9rem;
         }
 
         .empty-state, .loading-state, .error-state {
@@ -333,102 +262,6 @@
 
         .footer-text a:hover {
             text-decoration: underline;
-        }
-
-        @media (max-width: 700px) {
-            .container {
-                padding: 0 16px;
-            }
-
-            .spot-header {
-                display: none;
-            }
-
-            .spot-table {
-                border: none;
-                background: transparent;
-            }
-
-            .spot-row {
-                display: block;
-                background: var(--white);
-                border: 1px solid var(--border-light);
-                padding: 16px;
-                margin-bottom: 12px;
-            }
-
-            .spot-row:hover {
-                background: var(--white);
-            }
-
-            .spot-callsign {
-                display: block;
-                font-size: 1.25rem;
-                margin-bottom: 4px;
-            }
-
-            .spot-qc {
-                display: block;
-                margin-bottom: 8px;
-            }
-
-            .spot-freq {
-                display: inline;
-            }
-
-            .spot-freq::after {
-                content: ' \b7 ';
-                color: var(--border-light);
-            }
-
-            .spot-band {
-                display: inline;
-                margin-right: 8px;
-            }
-
-            .spot-snr {
-                display: inline;
-            }
-
-            .spot-snr::before {
-                content: 'SNR ';
-                color: var(--text-muted);
-                font-size: 0.8rem;
-            }
-
-            .spot-time {
-                display: block;
-                font-size: 0.85rem;
-                margin-top: 8px;
-            }
-
-            .header-content {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 8px;
-            }
-
-            h1 {
-                font-size: 1.5rem;
-            }
-
-            .controls {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .mode-filters {
-                justify-content: stretch;
-            }
-
-            .mode-filter {
-                flex: 1;
-                text-align: center;
-            }
-
-            .onair-footer {
-                margin-top: 20px;
-            }
         }
 
         /* Grouped member rows */
@@ -513,12 +346,6 @@
             padding: 1px 6px;
         }
 
-        .member-wpm {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            font-variant-numeric: tabular-nums;
-        }
-
         .member-meta {
             margin-left: auto;
             display: flex;
@@ -537,6 +364,13 @@
 
         .member-group.expanded .detail-panel {
             display: block;
+        }
+
+        .detail-loading {
+            text-align: center;
+            padding: 24px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
         }
 
         .detail-spots {
@@ -603,6 +437,34 @@
         }
 
         @media (max-width: 700px) {
+            .container {
+                padding: 0 16px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .mode-filters {
+                justify-content: stretch;
+            }
+
+            .mode-filter {
+                flex: 1;
+                text-align: center;
+            }
+
             .member-summary {
                 flex-wrap: wrap;
                 gap: 8px;
@@ -627,6 +489,10 @@
 
             .detail-map {
                 height: 200px;
+            }
+
+            .onair-footer {
+                margin-top: 20px;
             }
         }
     </style>
@@ -681,15 +547,20 @@
     <script>
         (function () {
             var MEMBERS_URL = 'members.txt';
+            var ACTIVITY_URL = 'https://vailrerbn.com/api/v1/activity';
             var SPOTS_URL = 'https://vailrerbn.com/api/v1/spots';
             var REFRESH_INTERVAL = 60000;
 
             var members = {};
-            var spotMap = {};   // keyed by spot ID, merged across refreshes
-            var allSpots = [];  // derived from spotMap, used for rendering
+            var activityResults = [];
             var activeMode = 'all';
             var refreshTimer = null;
-            var MAX_AGE_MS = 60 * 60 * 1000; // 1 hour
+
+            // Track expanded callsigns and their cached spot data
+            var expandedCallsigns = {};
+            var spotCache = {};
+            // Track Leaflet map instances for cleanup
+            var activeMaps = {};
 
             var resultsEl = document.getElementById('results');
             var statusDot = document.getElementById('status-dot');
@@ -717,6 +588,7 @@
             }
 
             function formatTime(ts) {
+                if (!ts) return '\u2014';
                 var d = new Date(ts);
                 var now = new Date();
                 var diffMs = now - d;
@@ -731,10 +603,12 @@
             }
 
             function formatFreq(khz) {
+                if (khz == null) return '\u2014';
                 return khz.toFixed(1);
             }
 
             function freqToBand(khz) {
+                if (khz == null) return '';
                 if (khz >= 1800 && khz <= 2000) return '160m';
                 if (khz >= 3500 && khz <= 4000) return '80m';
                 if (khz >= 5330 && khz <= 5410) return '60m';
@@ -748,11 +622,6 @@
                 if (khz >= 50000 && khz <= 54000) return '6m';
                 return '';
             }
-
-            // Track which callsigns are expanded (survives re-render)
-            var expandedCallsigns = {};
-            // Track Leaflet map instances for cleanup
-            var activeMaps = {};
 
             function gridToLatLng(grid) {
                 if (!grid || grid.length < 4) return null;
@@ -773,45 +642,6 @@
                 return [lat, lng];
             }
 
-            function groupSpots(spots) {
-                var map = {};
-                var order = [];
-                for (var i = 0; i < spots.length; i++) {
-                    var s = spots[i];
-                    if (!map[s.callsign]) {
-                        map[s.callsign] = {
-                            callsign: s.callsign,
-                            qcNumber: s.qcNumber,
-                            spots: [],
-                            bands: {},
-                            wpmSum: 0,
-                            wpmCount: 0,
-                            latestTimestamp: s.timestamp
-                        };
-                        order.push(s.callsign);
-                    }
-                    map[s.callsign].spots.push(s);
-                    var band = s.band || freqToBand(s.frequency);
-                    if (band) map[s.callsign].bands[band] = true;
-                    if (s.wpm) {
-                        map[s.callsign].wpmSum += s.wpm;
-                        map[s.callsign].wpmCount++;
-                    }
-                    if (new Date(s.timestamp) > new Date(map[s.callsign].latestTimestamp)) {
-                        map[s.callsign].latestTimestamp = s.timestamp;
-                    }
-                }
-                // Sort groups by most recent spot
-                order.sort(function (a, b) {
-                    return new Date(map[b].latestTimestamp) - new Date(map[a].latestTimestamp);
-                });
-                var result = [];
-                for (var j = 0; j < order.length; j++) {
-                    result.push(map[order[j]]);
-                }
-                return result;
-            }
-
             function destroyMaps() {
                 for (var key in activeMaps) {
                     if (activeMaps[key]) {
@@ -826,7 +656,6 @@
                 var container = document.getElementById(containerId);
                 if (!container) return;
 
-                // Collect markers from spotter grids
                 var markers = [];
                 for (var i = 0; i < spots.length; i++) {
                     var ll = gridToLatLng(spots[i].spotter_grid);
@@ -876,6 +705,72 @@
                 }
             }
 
+            function renderDetailPanel(callsign, spots) {
+                var panel = document.getElementById('detail-' + callsign);
+                if (!panel) return;
+
+                var hasCW = false;
+                for (var ci = 0; ci < spots.length; ci++) {
+                    if (spots[ci].mode === 'CW' && spots[ci].wpm) { hasCW = true; break; }
+                }
+
+                var html = '<table class="detail-spots"><thead><tr>' +
+                    '<th>Freq (kHz)</th><th>Band</th><th>SNR</th>' +
+                    (hasCW ? '<th>WPM</th>' : '') +
+                    '<th>Spotter</th><th>Time</th>' +
+                    '</tr></thead><tbody>';
+
+                for (var si = 0; si < spots.length; si++) {
+                    var sp = spots[si];
+                    var spBand = sp.band || freqToBand(sp.frequency);
+                    var spSnr = sp.snr != null ? sp.snr + ' dB' : '&mdash;';
+                    var spWpm = (sp.mode === 'CW' && sp.wpm) ? sp.wpm : '&mdash;';
+
+                    html += '<tr>' +
+                        '<td class="freq-col">' + formatFreq(sp.frequency) + '</td>' +
+                        '<td>' + (spBand ? '<span class="spot-band">' + spBand + '</span>' : '&mdash;') + '</td>' +
+                        '<td class="snr-col">' + spSnr + '</td>' +
+                        (hasCW ? '<td class="wpm-col">' + spWpm + '</td>' : '') +
+                        '<td>' + (sp.spotter || '&mdash;') + '</td>' +
+                        '<td class="time-col">' + formatTime(sp.timestamp) + '</td>' +
+                        '</tr>';
+                }
+
+                html += '</tbody></table>';
+                html += '<div id="map-' + callsign + '" class="detail-map"></div>';
+
+                panel.innerHTML = html;
+
+                setTimeout(function () { initMap(callsign, spots); }, 50);
+            }
+
+            function fetchDetailSpots(callsign) {
+                var panel = document.getElementById('detail-' + callsign);
+                if (!panel) return;
+
+                // Use cache if available
+                if (spotCache[callsign]) {
+                    renderDetailPanel(callsign, spotCache[callsign]);
+                    return;
+                }
+
+                panel.innerHTML = '<div class="detail-loading">Loading spots\u2026</div>';
+
+                fetch(SPOTS_URL + '/' + callsign + '?hours=1')
+                    .then(function (res) {
+                        if (!res.ok) return { spots: [] };
+                        return res.json();
+                    })
+                    .then(function (data) {
+                        var spots = data.spots || [];
+                        spotCache[callsign] = spots;
+                        renderDetailPanel(callsign, spots);
+                    })
+                    .catch(function () {
+                        panel.innerHTML = '<div class="detail-loading">Failed to load spot details.</div>';
+                    });
+            }
+
             function toggleGroup(callsign) {
                 var el = document.getElementById('group-' + callsign);
                 if (!el) return;
@@ -890,22 +785,20 @@
                 } else {
                     el.classList.add('expanded');
                     expandedCallsigns[callsign] = true;
-                    // Small delay so the container is visible before map init
-                    setTimeout(function () { initMap(callsign, JSON.parse(el.getAttribute('data-spots'))); }, 50);
+                    fetchDetailSpots(callsign);
                 }
             }
 
-            // Expose toggle for onclick
             window.__toggleGroup = toggleGroup;
 
-            function renderSpots() {
+            function renderResults() {
                 destroyMaps();
 
-                var filtered = allSpots;
+                var filtered = activityResults;
                 if (activeMode === 'CW') {
-                    filtered = allSpots.filter(function (s) { return s.mode === 'CW'; });
+                    filtered = activityResults.filter(function (r) { return r.last_mode === 'CW'; });
                 } else if (activeMode === 'other') {
-                    filtered = allSpots.filter(function (s) { return s.mode !== 'CW'; });
+                    filtered = activityResults.filter(function (r) { return r.last_mode && r.last_mode !== 'CW'; });
                 }
 
                 if (filtered.length === 0) {
@@ -918,221 +811,118 @@
                     return;
                 }
 
-                var groups = groupSpots(filtered);
-                var spotWord = filtered.length === 1 ? 'spot' : 'spots';
-                var memberLabel = groups.length === 1 ? 'member' : 'members';
-                spotCountEl.textContent = filtered.length + ' ' + spotWord + ' from ' + groups.length + ' ' + memberLabel;
+                var totalSpots = 0;
+                for (var i = 0; i < filtered.length; i++) totalSpots += filtered[i].count;
+                var memberLabel = filtered.length === 1 ? 'member' : 'members';
+                var spotWord = totalSpots === 1 ? 'spot' : 'spots';
+                spotCountEl.textContent = totalSpots + ' ' + spotWord + ' from ' + filtered.length + ' ' + memberLabel;
+
+                // Sort by most recent spot
+                filtered.sort(function (a, b) {
+                    return new Date(b.last_spotted) - new Date(a.last_spotted);
+                });
 
                 var chevronSvg = '<svg class="expand-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3l5 5-5 5"/></svg>';
 
                 var html = '<div class="member-groups">';
 
-                for (var g = 0; g < groups.length; g++) {
-                    var grp = groups[g];
-                    var isExpanded = expandedCallsigns[grp.callsign];
-                    var bandKeys = Object.keys(grp.bands);
-                    // Sort bands by frequency order
-                    var bandOrder = ['160m','80m','60m','40m','30m','20m','17m','15m','12m','10m','6m'];
-                    bandKeys.sort(function (a, b) {
-                        return bandOrder.indexOf(a) - bandOrder.indexOf(b);
-                    });
-
-                    var bandBadges = '';
-                    for (var b = 0; b < bandKeys.length; b++) {
-                        bandBadges += '<span class="member-band-badge">' + bandKeys[b] + '</span>';
-                    }
-
-                    var spotLabel = grp.spots.length === 1 ? '1 spot' : grp.spots.length + ' spots';
-                    var avgWpm = grp.wpmCount > 0 ? Math.round(grp.wpmSum / grp.wpmCount) : 0;
-
-                    // Serialize spots data for map init
-                    var spotsData = JSON.stringify(grp.spots).replace(/"/g, '&quot;');
+                for (var g = 0; g < filtered.length; g++) {
+                    var r = filtered[g];
+                    var isExpanded = expandedCallsigns[r.callsign];
+                    var band = freqToBand(r.last_frequency);
+                    var spotLabel = r.count === 1 ? '1 spot' : r.count + ' spots';
 
                     html +=
-                        '<div class="member-group' + (isExpanded ? ' expanded' : '') + '" id="group-' + grp.callsign + '" data-spots="' + spotsData + '">' +
-                        '<div class="member-summary" onclick="window.__toggleGroup(\'' + grp.callsign + '\')">' +
+                        '<div class="member-group' + (isExpanded ? ' expanded' : '') + '" id="group-' + r.callsign + '">' +
+                        '<div class="member-summary" onclick="window.__toggleGroup(\'' + r.callsign + '\')">' +
                         chevronSvg +
-                        '<span class="member-callsign"><a href="https://www.qrz.com/db/' + grp.callsign + '" target="_blank" rel="noopener" onclick="event.stopPropagation()">' + grp.callsign + '</a></span>' +
-                        '<span class="member-qc">QC #' + grp.qcNumber + '</span>' +
-                        '<span class="member-bands">' + bandBadges + '</span>' +
-                        (avgWpm ? '<span class="member-wpm">' + avgWpm + ' wpm</span>' : '') +
+                        '<span class="member-callsign"><a href="https://www.qrz.com/db/' + r.callsign + '" target="_blank" rel="noopener" onclick="event.stopPropagation()">' + r.callsign + '</a></span>' +
+                        '<span class="member-qc">QC #' + r.qcNumber + '</span>' +
+                        '<span class="member-bands">' + (band ? '<span class="member-band-badge">' + band + '</span>' : '') + '</span>' +
                         '<span class="member-meta">' +
                         '<span>' + spotLabel + '</span>' +
-                        '<span>' + formatTime(grp.latestTimestamp) + '</span>' +
+                        '<span>' + formatTime(r.last_spotted) + '</span>' +
                         '</span>' +
                         '</div>';
 
-                    // Detail panel
-                    html += '<div class="detail-panel">';
-
-                    // Spot sub-table
-                    var hasCW = false;
-                    for (var ci = 0; ci < grp.spots.length; ci++) {
-                        if (grp.spots[ci].mode === 'CW' && grp.spots[ci].wpm) { hasCW = true; break; }
-                    }
-
-                    html += '<table class="detail-spots"><thead><tr>' +
-                        '<th>Freq (kHz)</th><th>Band</th><th>SNR</th>' +
-                        (hasCW ? '<th>WPM</th>' : '') +
-                        '<th>Spotter</th><th>Time</th>' +
-                        '</tr></thead><tbody>';
-
-                    for (var si = 0; si < grp.spots.length; si++) {
-                        var sp = grp.spots[si];
-                        var spBand = sp.band || freqToBand(sp.frequency);
-                        var spSnr = sp.snr != null ? sp.snr + ' dB' : '&mdash;';
-                        var spWpm = (sp.mode === 'CW' && sp.wpm) ? sp.wpm : '&mdash;';
-
-                        html += '<tr>' +
-                            '<td class="freq-col">' + formatFreq(sp.frequency) + '</td>' +
-                            '<td>' + (spBand ? '<span class="spot-band">' + spBand + '</span>' : '&mdash;') + '</td>' +
-                            '<td class="snr-col">' + spSnr + '</td>' +
-                            (hasCW ? '<td class="wpm-col">' + spWpm + '</td>' : '') +
-                            '<td>' + (sp.spotter || '&mdash;') + '</td>' +
-                            '<td class="time-col">' + formatTime(sp.timestamp) + '</td>' +
-                            '</tr>';
-                    }
-
-                    html += '</tbody></table>';
-
-                    // Map container
-                    html += '<div id="map-' + grp.callsign + '" class="detail-map"></div>';
-
-                    html += '</div>'; // .detail-panel
-                    html += '</div>'; // .member-group
+                    html += '<div class="detail-panel" id="detail-' + r.callsign + '"></div>';
+                    html += '</div>';
                 }
 
-                html += '</div>'; // .member-groups
+                html += '</div>';
                 resultsEl.innerHTML = html;
 
-                // Re-init maps for already-expanded groups
+                // Re-fetch detail for already-expanded groups
                 for (var call in expandedCallsigns) {
-                    var el = document.getElementById('group-' + call);
-                    if (el) {
-                        var spotsJson = el.getAttribute('data-spots');
-                        if (spotsJson) {
-                            initMap(call, JSON.parse(spotsJson.replace(/&quot;/g, '"')));
-                        }
-                    }
+                    fetchDetailSpots(call);
                 }
             }
 
-            function fetchSpotsForCallsign(callsign) {
-                return fetch(SPOTS_URL + '/' + callsign + '?hours=1')
-                    .then(function (res) {
-                        if (!res.ok) return { spots: [] };
-                        return res.json();
-                    })
-                    .then(function (data) {
-                        return data.spots || [];
-                    })
-                    .catch(function () {
-                        return [];
-                    });
-            }
-
-            function fetchBatch(callsigns, batchSize) {
-                var batches = [];
-                for (var i = 0; i < callsigns.length; i += batchSize) {
-                    batches.push(callsigns.slice(i, i + batchSize));
-                }
-                var allResults = [];
-                return batches.reduce(function (chain, batch) {
-                    return chain.then(function () {
-                        return Promise.all(batch.map(function (call) {
-                            return fetchSpotsForCallsign(call);
-                        }));
-                    }).then(function (batchResults) {
-                        for (var j = 0; j < batchResults.length; j++) {
-                            allResults = allResults.concat(batchResults[j]);
-                        }
-                        return allResults;
-                    });
-                }, Promise.resolve());
-            }
-
-            function rebuildAllSpots() {
-                var now = Date.now();
-                var arr = [];
-                for (var id in spotMap) {
-                    var s = spotMap[id];
-                    if (now - new Date(s.timestamp).getTime() > MAX_AGE_MS) {
-                        delete spotMap[id];
-                    } else {
-                        arr.push(s);
-                    }
-                }
-                arr.sort(function (a, b) {
-                    return new Date(b.timestamp) - new Date(a.timestamp);
-                });
-                return arr;
-            }
-
-            function spotsChanged(oldSpots, newSpots) {
-                if (oldSpots.length !== newSpots.length) return true;
-                for (var i = 0; i < oldSpots.length; i++) {
-                    if (oldSpots[i].id !== newSpots[i].id) return true;
-                }
-                return false;
-            }
-
-            function fetchSpots() {
+            function fetchActivity() {
                 setStatus('loading', 'Updating\u2026');
                 refreshBtn.classList.add('refreshing');
 
                 var callsigns = Object.keys(members);
-                fetchBatch(callsigns, 25)
-                    .then(function (spots) {
-                        // Merge new spots into the map
-                        for (var i = 0; i < spots.length; i++) {
-                            var s = spots[i];
-                            var call = (s.callsign || '').toUpperCase();
-                            if (members[call] != null && s.id != null) {
-                                spotMap[s.id] = {
-                                    id: s.id,
-                                    callsign: call,
-                                    qcNumber: members[call],
-                                    frequency: s.frequency,
-                                    band: s.band || '',
-                                    mode: s.mode || '',
-                                    snr: s.snr,
-                                    spotter: s.spotter || '',
-                                    spotter_grid: s.spotter_grid || '',
-                                    wpm: s.wpm || null,
-                                    timestamp: s.timestamp
-                                };
+
+                // Batch into groups of 100 (API limit)
+                var batches = [];
+                for (var i = 0; i < callsigns.length; i += 100) {
+                    batches.push(callsigns.slice(i, i + 100));
+                }
+
+                // Clear spot cache on refresh so expanded panels get fresh data
+                spotCache = {};
+
+                Promise.all(batches.map(function (batch) {
+                    return fetch(ACTIVITY_URL + '?call=' + batch.join(',') + '&hours=1')
+                        .then(function (res) {
+                            if (!res.ok) return { callsigns: [] };
+                            return res.json();
+                        })
+                        .then(function (data) {
+                            return data.callsigns || [];
+                        })
+                        .catch(function () {
+                            return [];
+                        });
+                }))
+                .then(function (batchResults) {
+                    var results = [];
+                    for (var i = 0; i < batchResults.length; i++) {
+                        for (var j = 0; j < batchResults[i].length; j++) {
+                            var entry = batchResults[i][j];
+                            if (entry.spotted && members[entry.callsign] != null) {
+                                entry.qcNumber = members[entry.callsign];
+                                results.push(entry);
                             }
                         }
+                    }
 
-                        // Prune aged-out spots and rebuild sorted array
-                        var newSpots = rebuildAllSpots();
-                        if (spotsChanged(allSpots, newSpots)) {
-                            allSpots = newSpots;
-                            renderSpots();
-                        }
+                    activityResults = results;
+                    renderResults();
 
-                        var now = new Date();
-                        var h = now.getUTCHours().toString().padStart(2, '0');
-                        var m = now.getUTCMinutes().toString().padStart(2, '0');
-                        setStatus('ok', 'Updated ' + h + ':' + m + 'z');
-                    })
-                    .catch(function (err) {
-                        console.error('Failed to fetch spots:', err);
-                        if (allSpots.length === 0) {
-                            resultsEl.innerHTML =
-                                '<div class="error-state">' +
-                                '<p>Unable to load spot data. <a href="javascript:void(0)" onclick="window.__retryFetch()">Try again</a></p>' +
-                                '</div>';
-                        }
-                        setStatus('error', 'Update failed');
-                    })
-                    .finally(function () {
-                        refreshBtn.classList.remove('refreshing');
-                    });
+                    var now = new Date();
+                    var h = now.getUTCHours().toString().padStart(2, '0');
+                    var m = now.getUTCMinutes().toString().padStart(2, '0');
+                    setStatus('ok', 'Updated ' + h + ':' + m + 'z');
+                })
+                .catch(function (err) {
+                    console.error('Failed to fetch activity:', err);
+                    if (activityResults.length === 0) {
+                        resultsEl.innerHTML =
+                            '<div class="error-state">' +
+                            '<p>Unable to load spot data. <a href="javascript:void(0)" onclick="window.__retryFetch()">Try again</a></p>' +
+                            '</div>';
+                    }
+                    setStatus('error', 'Update failed');
+                })
+                .finally(function () {
+                    refreshBtn.classList.remove('refreshing');
+                });
             }
 
             window.__retryFetch = function () {
-                fetchSpots();
+                fetchActivity();
             };
 
             function init() {
@@ -1146,8 +936,8 @@
                     })
                     .then(function (text) {
                         members = parseMembers(text);
-                        fetchSpots();
-                        refreshTimer = setInterval(fetchSpots, REFRESH_INTERVAL);
+                        fetchActivity();
+                        refreshTimer = setInterval(fetchActivity, REFRESH_INTERVAL);
                     })
                     .catch(function (err) {
                         console.error('Failed to load members:', err);
@@ -1168,7 +958,7 @@
                     }
                     this.classList.add('active');
                     activeMode = this.getAttribute('data-mode');
-                    renderSpots();
+                    renderResults();
                 });
             }
 
@@ -1176,8 +966,8 @@
             refreshBtn.addEventListener('click', function () {
                 if (refreshBtn.classList.contains('refreshing')) return;
                 clearInterval(refreshTimer);
-                fetchSpots();
-                refreshTimer = setInterval(fetchSpots, REFRESH_INTERVAL);
+                fetchActivity();
+                refreshTimer = setInterval(fetchActivity, REFRESH_INTERVAL);
             });
 
             init();
