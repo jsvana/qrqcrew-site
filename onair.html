@@ -679,9 +679,11 @@
             var REFRESH_INTERVAL = 60000;
 
             var members = {};
-            var allSpots = [];
+            var spotMap = {};   // keyed by spot ID, merged across refreshes
+            var allSpots = [];  // derived from spotMap, used for rendering
             var activeMode = 'all';
             var refreshTimer = null;
+            var MAX_AGE_MS = 60 * 60 * 1000; // 1 hour
 
             var resultsEl = document.getElementById('results');
             var statusDot = document.getElementById('status-dot');
@@ -1035,6 +1037,31 @@
                 }, Promise.resolve());
             }
 
+            function rebuildAllSpots() {
+                var now = Date.now();
+                var arr = [];
+                for (var id in spotMap) {
+                    var s = spotMap[id];
+                    if (now - new Date(s.timestamp).getTime() > MAX_AGE_MS) {
+                        delete spotMap[id];
+                    } else {
+                        arr.push(s);
+                    }
+                }
+                arr.sort(function (a, b) {
+                    return new Date(b.timestamp) - new Date(a.timestamp);
+                });
+                return arr;
+            }
+
+            function spotsChanged(oldSpots, newSpots) {
+                if (oldSpots.length !== newSpots.length) return true;
+                for (var i = 0; i < oldSpots.length; i++) {
+                    if (oldSpots[i].id !== newSpots[i].id) return true;
+                }
+                return false;
+            }
+
             function fetchSpots() {
                 setStatus('loading', 'Updating\u2026');
                 refreshBtn.classList.add('refreshing');
@@ -1042,32 +1069,33 @@
                 var callsigns = Object.keys(members);
                 fetchBatch(callsigns, 25)
                     .then(function (spots) {
-                        var matched = [];
-
+                        // Merge new spots into the map
                         for (var i = 0; i < spots.length; i++) {
-                            var call = (spots[i].callsign || '').toUpperCase();
-                            if (members[call] != null) {
-                                matched.push({
+                            var s = spots[i];
+                            var call = (s.callsign || '').toUpperCase();
+                            if (members[call] != null && s.id != null) {
+                                spotMap[s.id] = {
+                                    id: s.id,
                                     callsign: call,
                                     qcNumber: members[call],
-                                    frequency: spots[i].frequency,
-                                    band: spots[i].band || '',
-                                    mode: spots[i].mode || '',
-                                    snr: spots[i].snr,
-                                    spotter: spots[i].spotter || '',
-                                    spotter_grid: spots[i].spotter_grid || '',
-                                    wpm: spots[i].wpm || null,
-                                    timestamp: spots[i].timestamp
-                                });
+                                    frequency: s.frequency,
+                                    band: s.band || '',
+                                    mode: s.mode || '',
+                                    snr: s.snr,
+                                    spotter: s.spotter || '',
+                                    spotter_grid: s.spotter_grid || '',
+                                    wpm: s.wpm || null,
+                                    timestamp: s.timestamp
+                                };
                             }
                         }
 
-                        matched.sort(function (a, b) {
-                            return new Date(b.timestamp) - new Date(a.timestamp);
-                        });
-
-                        allSpots = matched;
-                        renderSpots();
+                        // Prune aged-out spots and rebuild sorted array
+                        var newSpots = rebuildAllSpots();
+                        if (spotsChanged(allSpots, newSpots)) {
+                            allSpots = newSpots;
+                            renderSpots();
+                        }
 
                         var now = new Date();
                         var h = now.getUTCHours().toString().padStart(2, '0');
