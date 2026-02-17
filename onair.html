@@ -513,6 +513,12 @@
             padding: 1px 6px;
         }
 
+        .member-wpm {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-variant-numeric: tabular-nums;
+        }
+
         .member-meta {
             margin-left: auto;
             display: flex;
@@ -778,6 +784,8 @@
                             qcNumber: s.qcNumber,
                             spots: [],
                             bands: {},
+                            wpmSum: 0,
+                            wpmCount: 0,
                             latestTimestamp: s.timestamp
                         };
                         order.push(s.callsign);
@@ -785,6 +793,10 @@
                     map[s.callsign].spots.push(s);
                     var band = s.band || freqToBand(s.frequency);
                     if (band) map[s.callsign].bands[band] = true;
+                    if (s.wpm) {
+                        map[s.callsign].wpmSum += s.wpm;
+                        map[s.callsign].wpmCount++;
+                    }
                     if (new Date(s.timestamp) > new Date(map[s.callsign].latestTimestamp)) {
                         map[s.callsign].latestTimestamp = s.timestamp;
                     }
@@ -931,6 +943,7 @@
                     }
 
                     var spotLabel = grp.spots.length === 1 ? '1 spot' : grp.spots.length + ' spots';
+                    var avgWpm = grp.wpmCount > 0 ? Math.round(grp.wpmSum / grp.wpmCount) : 0;
 
                     // Serialize spots data for map init
                     var spotsData = JSON.stringify(grp.spots).replace(/"/g, '&quot;');
@@ -942,6 +955,7 @@
                         '<span class="member-callsign"><a href="https://www.qrz.com/db/' + grp.callsign + '" target="_blank" rel="noopener" onclick="event.stopPropagation()">' + grp.callsign + '</a></span>' +
                         '<span class="member-qc">QC #' + grp.qcNumber + '</span>' +
                         '<span class="member-bands">' + bandBadges + '</span>' +
+                        (avgWpm ? '<span class="member-wpm">' + avgWpm + ' wpm</span>' : '') +
                         '<span class="member-meta">' +
                         '<span>' + spotLabel + '</span>' +
                         '<span>' + formatTime(grp.latestTimestamp) + '</span>' +
