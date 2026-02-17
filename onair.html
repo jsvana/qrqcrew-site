@@ -705,7 +705,6 @@
                         result[match[1].toUpperCase()] = parseInt(match[2], 10);
                     }
                 }
-                console.warn('[debug] parseMembers: ' + Object.keys(result).length + ' members, first 5: ' + Object.keys(result).slice(0, 5).join(', '));
                 return result;
             }
 
@@ -1002,20 +1001,48 @@
                 }
             }
 
+            function fetchSpotsForCallsign(callsign) {
+                return fetch(SPOTS_URL + '/' + callsign + '?hours=1')
+                    .then(function (res) {
+                        if (!res.ok) return { spots: [] };
+                        return res.json();
+                    })
+                    .then(function (data) {
+                        return data.spots || [];
+                    })
+                    .catch(function () {
+                        return [];
+                    });
+            }
+
+            function fetchBatch(callsigns, batchSize) {
+                var batches = [];
+                for (var i = 0; i < callsigns.length; i += batchSize) {
+                    batches.push(callsigns.slice(i, i + batchSize));
+                }
+                var allResults = [];
+                return batches.reduce(function (chain, batch) {
+                    return chain.then(function () {
+                        return Promise.all(batch.map(function (call) {
+                            return fetchSpotsForCallsign(call);
+                        }));
+                    }).then(function (batchResults) {
+                        for (var j = 0; j < batchResults.length; j++) {
+                            allResults = allResults.concat(batchResults[j]);
+                        }
+                        return allResults;
+                    });
+                }, Promise.resolve());
+            }
+
             function fetchSpots() {
                 setStatus('loading', 'Updating\u2026');
                 refreshBtn.classList.add('refreshing');
 
-                var url = SPOTS_URL + '?limit=1000';
-                fetch(url)
-                    .then(function (res) {
-                        if (!res.ok) throw new Error('API returned ' + res.status);
-                        return res.json();
-                    })
-                    .then(function (data) {
-                        var spots = data.spots || [];
+                var callsigns = Object.keys(members);
+                fetchBatch(callsigns, 25)
+                    .then(function (spots) {
                         var matched = [];
-                        console.warn('[debug] fetchSpots: API returned ' + spots.length + ' spots, members loaded: ' + Object.keys(members).length);
 
                         for (var i = 0; i < spots.length; i++) {
                             var call = (spots[i].callsign || '').toUpperCase();
@@ -1039,7 +1066,6 @@
                             return new Date(b.timestamp) - new Date(a.timestamp);
                         });
 
-                        console.warn('[debug] fetchSpots: matched ' + matched.length + ' spots' + (matched.length > 0 ? ' (' + matched[0].callsign + '...)' : ''));
                         allSpots = matched;
                         renderSpots();
 
