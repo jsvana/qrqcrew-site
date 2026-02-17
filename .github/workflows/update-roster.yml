@@ -1,9 +1,16 @@
 name: Update Roster
 on:
   push:
+    paths:
+      - members.txt
+      - scripts/build-roster.py
   schedule:
     - cron: '0 */6 * * *'
   workflow_dispatch:
+
+concurrency:
+  group: update-roster
+  cancel-in-progress: true
 
 permissions:
   contents: write
