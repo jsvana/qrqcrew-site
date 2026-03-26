@@ -71,6 +71,8 @@ def parse_members(csv_text: str) -> list[dict]:
         except ValueError:
             qc_number = 0
 
+        if callsign.upper() == "K2EJT":
+            continue
         if callsign and qc_number:
             members.append({
                 "callsign": callsign,
