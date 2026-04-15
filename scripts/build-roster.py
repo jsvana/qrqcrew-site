@@ -513,7 +513,7 @@ def generate_html(members: list[dict]) -> str:
         <div class="container">
             <div class="footer-morse">&minus;&middot;&minus;&middot; &minus;&minus;&middot;&minus; / &minus;&minus;&middot;&minus; &minus;&middot;&minus;&middot;</div>
             <p class="footer-text">
-                QRQ Crew Club &copy; 2025 &middot; <a href="index.html">Home</a>
+                QRQ Crew Club &copy; 2026 &middot; <a href="index.html">Home</a>
             </p>
         </div>
     </footer>
