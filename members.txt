@@ -1,5 +1,5 @@
 # QC Callsign Notes for Ham2K PoLo
-# Generated: 2026-05-06 19:27:03 UTC
+# Generated: 2026-05-06 20:24:17 UTC
 # Do not edit manually - this file is auto-generated
 
 AA0YY ⚓ MARK B QC #86
@@ -33,7 +33,6 @@ JA1GZV ⚓ Moto Motoaki QC #129
 K0VBU ⚓ WILLIAM W QC #76
 K1JD ⚓ JOHN G QC #63
 K1KIG ⚓ Kiersten S QC #137
-K2MMT ⚓ CHRISTOPHER A QC #133
 K2MZ ⚓ Robert S QC #83
 K4FIR ⚓ Herbert H QC #41
 K4FR ⚓ Scott D QC #4
@@ -52,8 +51,8 @@ KA1RVM ⚓ WILLIAM H QC #143
 KA9S ⚓ JEFFREY A QC #144
 KB7RYU ⚓ JOEL N QC #66
 KC0ZPS ⚓ Ron QC #50
-KD7DUG ⚓ Douglas S QC #26
 KD7J ⚓ Jeffry E QC #34
+KD7RT ⚓ Douglas S QC #26
 KE0M ⚓ Joseph QC #117
 KE2FUA ⚓ Daniel J QC #62
 KE8TBM ⚓ Fred H QC #36
@@ -110,6 +109,7 @@ NB5E ⚓ BRANDON L QC #116
 ND4K ⚓ DAVID C QC #42
 NE5A ⚓ GEORGE D QC #72
 NN3E ⚓ KEVIN J QC #52
+NN6G ⚓ CHRISTOPHER A QC #133
 NQ8J ⚓ ERIC A QC #84
 NR4A ⚓ SAMUEL D QC #51
 NU1D ⚓ Seth M QC #68
