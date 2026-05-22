@@ -1,5 +1,5 @@
 # QC Callsign Notes for Ham2K PoLo
-# Generated: 2026-05-22 19:09:57 UTC
+# Generated: 2026-05-22 20:10:12 UTC
 # Do not edit manually - this file is auto-generated
 
 AA0YY ⚓ MARK B QC #86
@@ -78,6 +78,7 @@ KR4EBK ⚓ Andrew J QC #29
 KR4FLM ⚓ Hunter C QC #98
 KR8P ⚓ BRADLEY A QC #7
 KT0AA ⚓ TONY QC #18
+KT3X ⚓ Dr. Brian A QC #157
 KV1I ⚓ Imre QC #74
 KV8X ⚓ ALLEN J QC #39
 M0XCV ⚓ Charlotte QC #124
