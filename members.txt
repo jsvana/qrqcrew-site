@@ -1,5 +1,5 @@
 # QC Callsign Notes for Ham2K PoLo
-# Generated: 2026-05-27 01:34:27 UTC
+# Generated: 2026-05-27 02:34:41 UTC
 # Do not edit manually - this file is auto-generated
 
 AA0YY ⚓ MARK B QC #86
@@ -66,6 +66,7 @@ KI7QCF ⚓ FORREST S QC #3
 KJ5CMP ⚓ ISAIAH L QC #44
 KK7D ⚓ Michael A QC #8
 KK7QAS ⚓ Josh QC #45
+KK9T ⚓ TIMOTHY L QC #158
 KM7ANM ⚓ Devan QC #108
 KM7COJ ⚓ Joshua L QC #28
 KN2D ⚓ KENNETH B QC #77
@@ -123,6 +124,7 @@ VE1EM ⚓ Jesse QC #22
 VE7OSH ⚓ Amrit R QC #93
 VE7SRF ⚓ Sheldon QC #33
 VK3JFR ⚓ James F QC #147
+VK3OU ⚓ Andrew QC #159
 W0CCA ⚓ CLINTON C QC #103
 W1VES ⚓ Devon QC #57
 W1WC ⚓ William B QC #35
