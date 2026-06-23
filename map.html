@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crew Map | QRQ Crew Club</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #1B3A57;
+            --navy-dark: #132A40;
+            --slate-blue: #4A7C9B;
+            --light-blue: #7BA3BE;
+            --cream: #FDFBF7;
+            --white: #FFFFFF;
+            --text-dark: #2C3E50;
+            --text-muted: #5D6D7E;
+            --border-light: #D5DFE5;
+            --land-unlit: #E4EAEE;
+            --land-border: #FBFAF6;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Source Sans Pro', Georgia, serif;
+            background-color: var(--cream);
+            color: var(--text-dark);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        header {
+            background: var(--white);
+            border-bottom: 3px solid var(--navy);
+            padding: 30px 0;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--slate-blue);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+        .back-link:hover { color: var(--navy); }
+
+        .header-content {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            margin-top: 16px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--navy);
+        }
+
+        .member-count { font-size: 0.9rem; color: var(--text-muted); }
+
+        nav {
+            background: var(--navy);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            max-width: 1100px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+        nav a {
+            display: block;
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 16px 28px;
+            transition: background 0.3s ease;
+            border-left: 1px solid rgba(255,255,255,0.1);
+        }
+        nav li:first-child a { border-left: none; }
+        nav a:hover, nav a.active { background: var(--navy-dark); }
+
+        main { padding: 40px 0 80px; }
+
+        .section-intro {
+            text-align: center;
+            color: var(--text-muted);
+            max-width: 640px;
+            margin: 0 auto 28px;
+            font-size: 1.05rem;
+        }
+
+        .view-toggle {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            margin-bottom: 28px;
+        }
+        .view-toggle button {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--slate-blue);
+            background: var(--white);
+            border: 1px solid var(--slate-blue);
+            padding: 10px 26px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+        .view-toggle button:first-child { border-right: none; }
+        .view-toggle button.active {
+            background: var(--navy);
+            color: var(--white);
+            border-color: var(--navy);
+        }
+
+        .map-frame {
+            background: var(--white);
+            border: 1px solid var(--border-light);
+            padding: 16px;
+            position: relative;
+        }
+        .map-frame svg { width: 100%; height: auto; display: block; }
+
+        .land { stroke: var(--land-border); stroke-width: 0.5px; }
+        .land.unlit { fill: var(--land-unlit); }
+        .land.lit { fill: var(--slate-blue); }
+        .land.lit:hover { fill: var(--navy); }
+        .sphere { fill: #F2F6F8; stroke: var(--border-light); stroke-width: 1px; }
+        .graticule { fill: none; stroke: var(--border-light); stroke-width: 0.4px; opacity: 0.7; }
+
+        .legend {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 20px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            flex-wrap: wrap;
+        }
+        .legend .swatch {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
+            vertical-align: middle;
+            border: 1px solid var(--border-light);
+        }
+        .swatch.lit { background: var(--slate-blue); }
+        .swatch.unlit { background: var(--land-unlit); }
+
+        .tooltip {
+            position: fixed;
+            pointer-events: none;
+            background: var(--navy);
+            color: var(--white);
+            font-size: 0.85rem;
+            padding: 6px 10px;
+            border-radius: 3px;
+            opacity: 0;
+            transition: opacity 0.15s ease;
+            white-space: nowrap;
+            z-index: 200;
+        }
+        .tooltip .tt-tag {
+            display: block;
+            font-size: 0.7rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--light-blue);
+        }
+
+        .map-status {
+            text-align: center;
+            color: var(--text-muted);
+            padding: 60px 20px;
+        }
+
+        .last-updated {
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            opacity: 0.7;
+            margin-top: 24px;
+        }
+
+        footer {
+            background: var(--navy);
+            color: var(--white);
+            padding: 30px 0;
+            text-align: center;
+        }
+        .footer-morse {
+            font-size: 0.9rem;
+            letter-spacing: 0.3em;
+            margin-bottom: 12px;
+            opacity: 0.6;
+        }
+        .footer-text { font-size: 0.85rem; opacity: 0.8; }
+        .footer-text a { color: var(--light-blue); text-decoration: none; }
+        .footer-text a:hover { text-decoration: underline; }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 1.5rem; }
+            nav a { padding: 12px 16px; font-size: 0.8rem; }
+            .header-content { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="index.html" class="back-link">&larr; Back to Home</a>
+            <div class="header-content">
+                <h1>Crew Map</h1>
+                <span class="member-count" id="memberCount"></span>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html#purpose">Purpose</a></li>
+            <li><a href="index.html#events">Events</a></li>
+            <li><a href="index.html#membership">Membership</a></li>
+            <li><a href="roster.html">Roster</a></li>
+            <li><a href="map.html" class="active">Map</a></li>
+            <li><a href="onair.html">On Air</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="container">
+            <p class="section-intro">Wherever the QRQ Crew calls home. Highlighted regions show
+            the QTH states and countries where members operate &mdash; presence only, no member
+            counts.</p>
+
+            <div class="view-toggle" id="viewToggle">
+                <button data-view="world" class="active">World</button>
+                <button data-view="us">United States</button>
+            </div>
+
+            <div class="map-frame">
+                <div id="mapStatus" class="map-status">Loading map&hellip;</div>
+                <svg id="map" viewBox="0 0 960 500" preserveAspectRatio="xMidYMid meet" style="display:none;"></svg>
+            </div>
+
+            <div class="legend">
+                <span><span class="swatch lit"></span>QRQ Crew QTH</span>
+                <span><span class="swatch unlit"></span>No members yet</span>
+            </div>
+
+            <p class="last-updated" id="lastUpdated"></p>
+        </div>
+    </main>
+
+    <div class="tooltip" id="tooltip"></div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-morse">&minus;&middot;&minus;&middot; &minus;&minus;&middot;&minus; / &minus;&minus;&middot;&minus; &minus;&middot;&minus;&middot;</div>
+            <p class="footer-text">
+                QRQ Crew Club &copy; 2026 &middot; <a href="index.html">Home</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+    <script>
+    (function () {
+        const W = 960, H = 500;
+        const svg = d3.select("#map");
+        const statusEl = document.getElementById("mapStatus");
+        const tooltip = document.getElementById("tooltip");
+
+        let locations = null;     // parsed locations.json
+        let world = null;         // {countries: GeoJSON}
+        let us = null;            // {states: GeoJSON}
+        let litCountries = new Set();
+        let litStates = new Set();
+        let currentView = "world";
+
+        function showStatus(msg) {
+            statusEl.textContent = msg;
+            statusEl.style.display = "block";
+            svg.style("display", "none");
+        }
+
+        function showMap() {
+            statusEl.style.display = "none";
+            svg.style("display", "block");
+        }
+
+        function moveTooltip(event, name, lit) {
+            tooltip.style.opacity = 1;
+            tooltip.style.left = (event.clientX + 14) + "px";
+            tooltip.style.top = (event.clientY + 14) + "px";
+            tooltip.innerHTML = (lit ? '<span class="tt-tag">QRQ Crew QTH</span>' : "") +
+                name;
+        }
+        function hideTooltip() { tooltip.style.opacity = 0; }
+
+        function renderWorld() {
+            svg.selectAll("*").remove();
+            const projection = d3.geoEqualEarth().fitSize([W, H], world.countries);
+            const path = d3.geoPath(projection);
+
+            svg.append("path").attr("class", "sphere")
+                .attr("d", path({ type: "Sphere" }));
+            svg.append("path").attr("class", "graticule")
+                .datum(d3.geoGraticule10()).attr("d", path);
+
+            svg.append("g").selectAll("path")
+                .data(world.countries.features)
+                .join("path")
+                .attr("d", path)
+                .attr("class", d => "land " + (litCountries.has(+d.id) ? "lit" : "unlit"))
+                .on("mousemove", (event, d) => {
+                    const lit = litCountries.has(+d.id);
+                    moveTooltip(event, (d.properties && d.properties.name) || "", lit);
+                })
+                .on("mouseleave", hideTooltip);
+        }
+
+        function renderUS() {
+            svg.selectAll("*").remove();
+            const projection = d3.geoAlbersUsa().fitSize([W, H], us.states);
+            const path = d3.geoPath(projection);
+
+            svg.append("g").selectAll("path")
+                .data(us.states.features)
+                .join("path")
+                .attr("d", path)
+                .attr("class", d => "land " + (litStates.has(+d.id) ? "lit" : "unlit"))
+                .on("mousemove", (event, d) => {
+                    const lit = litStates.has(+d.id);
+                    moveTooltip(event, (d.properties && d.properties.name) || "", lit);
+                })
+                .on("mouseleave", hideTooltip);
+        }
+
+        function render() {
+            if (currentView === "world") renderWorld();
+            else renderUS();
+        }
+
+        document.getElementById("viewToggle").addEventListener("click", (e) => {
+            const btn = e.target.closest("button");
+            if (!btn) return;
+            currentView = btn.dataset.view;
+            document.querySelectorAll("#viewToggle button")
+                .forEach(b => b.classList.toggle("active", b === btn));
+            render();
+        });
+
+        Promise.all([
+            fetch("data/locations.json").then(r => {
+                if (!r.ok) throw new Error("locations.json " + r.status);
+                return r.json();
+            }),
+            d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json"),
+            d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json"),
+        ]).then(([loc, worldTopo, usTopo]) => {
+            locations = loc;
+            litCountries = new Set((loc.countries || []).map(c => +c.ccn3));
+            litStates = new Set((loc.us_states || []).map(s => +s.fips));
+
+            world = { countries: topojson.feature(worldTopo, worldTopo.objects.countries) };
+            us = { states: topojson.feature(usTopo, usTopo.objects.states) };
+
+            const n = loc.member_count || 0;
+            document.getElementById("memberCount").textContent =
+                n + " Member" + (n === 1 ? "" : "s") + " · " +
+                litCountries.size + " countr" + (litCountries.size === 1 ? "y" : "ies");
+            if (loc.generated) {
+                document.getElementById("lastUpdated").textContent =
+                    "Map data updated " + loc.generated.replace("T", " ").replace("Z", " UTC");
+            }
+            // Hide the U.S. toggle until we actually have state data to show.
+            if (litStates.size === 0) {
+                const usBtn = document.querySelector('#viewToggle button[data-view="us"]');
+                if (usBtn) usBtn.style.display = "none";
+            }
+
+            showMap();
+            render();
+        }).catch(err => {
+            console.error(err);
+            showStatus("Sorry, the map could not be loaded. Please try again later.");
+        });
+    })();
+    </script>
+</body>
+</html>
