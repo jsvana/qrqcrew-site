@@ -27,6 +27,21 @@ jobs:
       - name: Build roster page
         run: python3 scripts/build-roster.py
 
+      # Persist QRZ lookups between runs so we only query newly added callsigns.
+      - name: Restore QRZ cache
+        uses: actions/cache@v4
+        with:
+          path: data/qrz_cache.json
+          key: qrz-cache-${{ hashFiles('members.txt') }}
+          restore-keys: |
+            qrz-cache-
+
+      - name: Build crew map data
+        env:
+          QRZ_USERNAME: ${{ secrets.QRZ_USERNAME }}
+          QRZ_PASSWORD: ${{ secrets.QRZ_PASSWORD }}
+        run: python3 scripts/build-map.py
+
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
