@@ -45,6 +45,7 @@ jobs:
         run: python3 scripts/update-callsigns.py --apply
 
       - name: Commit callsign updates
+        if: github.ref == 'refs/heads/main'
         run: |
           if git diff --quiet -- members.txt qrqcrew-notes.txt; then
             echo "No callsign changes to commit."

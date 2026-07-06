@@ -1,0 +1,24 @@
+name: Check Callsigns
+
+# Manual dry run: report which member callsigns QRZ says have changed,
+# without modifying anything. The same check runs with --apply during deploy.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check member callsigns against QRZ (dry run)
+        env:
+          QRZ_USERNAME: ${{ secrets.QRZ_USERNAME }}
+          QRZ_PASSWORD: ${{ secrets.QRZ_PASSWORD }}
+        run: |
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          python3 scripts/update-callsigns.py 2>&1 | tee -a "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
