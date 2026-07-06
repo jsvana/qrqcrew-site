@@ -16,10 +16,18 @@ import os
 import re
 import sys
 import time
-import urllib.parse
-import urllib.request
-import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from qrz import (
+    QRZClient,
+    QRZError,
+    QRZNotFound,
+    base_callsign,
+    cache_entry,
+    load_cache,
+    save_cache,
+)
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MEMBERS_FILE = os.path.join(ROOT, "members.txt")
@@ -27,7 +35,6 @@ OUTPUT_FILE = os.path.join(ROOT, "data", "locations.json")
 CACHE_FILE = os.path.join(ROOT, "data", "qrz_cache.json")
 
 QRZ_AGENT = "qrqcrew-map/1.0"
-QRZ_BASE = "https://xmldata.qrz.com/xml/current/"
 
 # ISO 3166-1: alpha-2 -> (numeric "ccn3", display name).
 # ccn3 is what the world-atlas TopoJSON uses as its feature id, so the map
@@ -177,16 +184,6 @@ def parse_members(path):
     return calls
 
 
-def base_callsign(call):
-    """Strip portable/operating suffixes & prefixes (e.g. W6JY/P, K1ABC/4)."""
-    if "/" in call:
-        parts = [p for p in call.split("/") if p]
-        # Choose the longest part as the "home" call (handles K1ABC/4 and DL/K1ABC)
-        parts.sort(key=len, reverse=True)
-        return parts[0]
-    return call
-
-
 def country_from_call(call):
     """Resolve ISO alpha-2 country from a callsign prefix, or None."""
     c = base_callsign(call)
@@ -198,71 +195,13 @@ def country_from_call(call):
 
 
 # ---------------------------------------------------------------------------
-# QRZ XML API (optional)
+# QRZ XML API (optional) -- see scripts/qrz.py
 # ---------------------------------------------------------------------------
-
-QRZ_NS = "{http://xmldata.qrz.com}"
-
-
-def _qrz_get(params):
-    url = QRZ_BASE + "?" + urllib.parse.urlencode(params, safe=";")
-    req = urllib.request.Request(url, headers={"User-Agent": QRZ_AGENT})
-    with urllib.request.urlopen(req, timeout=30) as resp:
-        return resp.read().decode("utf-8")
-
-
-def qrz_login(username, password):
-    """Return a QRZ session key, or raise."""
-    xml = _qrz_get({"username": username, "password": password, "agent": QRZ_AGENT})
-    root = ET.fromstring(xml)
-    session = root.find(f"{QRZ_NS}Session")
-    if session is None:
-        raise RuntimeError("QRZ: no session element in response")
-    err = session.find(f"{QRZ_NS}Error")
-    if err is not None and err.text:
-        raise RuntimeError(f"QRZ login error: {err.text.strip()}")
-    key = session.find(f"{QRZ_NS}Key")
-    if key is None or not key.text:
-        raise RuntimeError("QRZ: login returned no session key")
-    return key.text.strip()
-
-
-def qrz_lookup(session_key, call):
-    """Return dict with state/country for a callsign, or {} if not found."""
-    xml = _qrz_get({"s": session_key, "callsign": call})
-    root = ET.fromstring(xml)
-    cs = root.find(f"{QRZ_NS}Callsign")
-    if cs is None:
-        return {}
-    out = {}
-    for tag in ("state", "country", "dxcc"):
-        el = cs.find(f"{QRZ_NS}{tag}")
-        if el is not None and el.text:
-            out[tag] = el.text.strip()
-    return out
-
-
-def load_cache():
-    if os.path.exists(CACHE_FILE):
-        try:
-            with open(CACHE_FILE) as f:
-                return json.load(f)
-        except (OSError, ValueError):
-            pass
-    return {}
-
-
-def save_cache(cache):
-    with open(CACHE_FILE, "w") as f:
-        json.dump(cache, f, indent=2, sort_keys=True)
-        f.write("\n")
-
 
 def enrich_with_qrz(calls, cache):
     """Look up any callsigns missing from the cache. Returns True if QRZ ran."""
-    username = os.environ.get("QRZ_USERNAME")
-    password = os.environ.get("QRZ_PASSWORD")
-    if not username or not password:
+    client = QRZClient.from_env(agent=QRZ_AGENT)
+    if client is None:
         print("QRZ credentials not set -- skipping state lookup (countries only).")
         return False
 
@@ -273,14 +212,21 @@ def enrich_with_qrz(calls, cache):
 
     print(f"QRZ: looking up {len(missing)} new callsign(s)...")
     try:
-        key = qrz_login(username, password)
-    except Exception as e:  # noqa: BLE001 - fall back to cache/countries
+        client.login()
+    except QRZError as e:  # fall back to cache/countries
         print(f"QRZ login failed: {e}", file=sys.stderr)
         return False
 
     for call in missing:
         try:
-            cache[call] = qrz_lookup(key, base_callsign(call))
+            res = client.resolve(call)
+            cache[call] = cache_entry(res.record)
+            if res.changed:
+                print(
+                    f"WARNING: {call} has changed callsign to {res.current}. "
+                    f"Run scripts/update-callsigns.py to update the member list.",
+                    file=sys.stderr,
+                )
         except Exception as e:  # noqa: BLE001 - record empty, keep going
             print(f"QRZ lookup failed for {call}: {e}", file=sys.stderr)
             cache[call] = {}
@@ -292,17 +238,19 @@ def build():
     calls = parse_members(MEMBERS_FILE)
     print(f"Parsed {len(calls)} member callsigns")
 
-    cache = load_cache()
+    cache = load_cache(CACHE_FILE)
     used_qrz = enrich_with_qrz(calls, cache)
     if used_qrz:
-        save_cache(cache)
+        save_cache(CACHE_FILE, cache)
 
     countries = {}   # ccn3 -> {iso2, ccn3, name}
     states = {}      # fips -> {usps, fips, name}
     unresolved = []
 
     for call in calls:
-        iso2 = country_from_call(call)
+        # Prefer the current callsign from QRZ (handles callsign changes).
+        current = (cache.get(call) or {}).get("call") or call
+        iso2 = country_from_call(current)
         if iso2 and iso2 in ISO:
             ccn3, name = ISO[iso2]
             countries[ccn3] = {"iso2": iso2, "ccn3": ccn3, "name": name}

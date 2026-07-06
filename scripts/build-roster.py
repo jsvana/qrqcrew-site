@@ -1,11 +1,24 @@
 #!/usr/bin/env python3
-"""Fetch the QRQ Crew roster CSV from Google Sheets and generate a static roster.html."""
+"""Fetch the QRQ Crew roster CSV from Google Sheets and generate a static roster.html.
+
+If QRZ credentials (QRZ_USERNAME / QRZ_PASSWORD) are available, each callsign
+is resolved against QRZ so members who changed callsigns (e.g. KI5GTR -> NQ5A)
+show up under their current call even before the sheet is updated.
+"""
 
 import csv
 import io
+import os
 import sys
+import time
 import urllib.request
 from datetime import datetime, timezone
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from qrz import QRZClient, QRZError, cache_entry, load_cache, save_cache
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+CACHE_FILE = os.path.join(ROOT, "data", "qrz_cache.json")
 
 SHEET_CSV_URL = (
     "https://docs.google.com/spreadsheets/d/e/"
@@ -82,6 +95,40 @@ def parse_members(csv_text: str) -> list[dict]:
             })
 
     members.sort(key=lambda m: m["qc_number"])
+    return members
+
+
+def resolve_callsign_changes(members: list[dict]) -> list[dict]:
+    """Swap in current callsigns for members QRZ says have changed calls.
+
+    Uses the shared data/qrz_cache.json (also written by build-map.py); only
+    callsigns missing from the cache are looked up, and only when QRZ
+    credentials are configured. The roster still builds fine without either.
+    """
+    cache = load_cache(CACHE_FILE)
+    client = QRZClient.from_env(agent="qrqcrew-roster/1.0")
+    dirty = False
+
+    for member in members:
+        call = member["callsign"].upper()
+        info = cache.get(call)
+        if info is None and client is not None:
+            try:
+                info = cache_entry(client.lookup(call))
+            except QRZError as e:
+                print(f"QRZ lookup failed for {call}: {e}", file=sys.stderr)
+                info = {}
+            cache[call] = info
+            dirty = True
+            time.sleep(0.3)  # be polite to QRZ
+
+        current = (info or {}).get("call", "")
+        if current and current != call:
+            print(f"Callsign change from QRZ: {call} -> {current}")
+            member["callsign"] = current
+
+    if dirty:
+        save_cache(CACHE_FILE, cache)
     return members
 
 
@@ -536,6 +583,8 @@ def main() -> int:
         return 1
 
     print(f"Parsed {len(members)} members")
+
+    members = resolve_callsign_changes(members)
 
     html = generate_html(members)
     with open("roster.html", "w") as f:
