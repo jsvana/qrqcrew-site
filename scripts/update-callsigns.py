@@ -58,6 +58,12 @@ def detect_changes(calls):
         )
         sys.exit(1)
 
+    try:
+        client.login()
+    except QRZError as e:
+        print(f"ERROR: QRZ login failed: {e}", file=sys.stderr)
+        sys.exit(1)
+
     changes = {}
     print(f"Checking {len(calls)} callsigns against QRZ...")
     for call in calls:

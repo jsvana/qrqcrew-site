@@ -19,6 +19,8 @@ Static website for the QRQ Crew Club, a high-speed CW (Morse code) amateur radio
   warns when a member's callsign has changed
 - `scripts/update-callsigns.py` - Checks every member callsign against QRZ
   and rewrites `members.txt`/`qrqcrew-notes.txt` when calls change
-  (dry run by default; `--apply` to write, `--map OLD=NEW` for offline use)
+  (dry run by default; `--apply` to write, `--map OLD=NEW` for offline use).
+  Runs automatically with `--apply` during each deploy (on push and every
+  6 hours), committing any changes back to `main`
 
 Run the library tests with `python3 -m unittest discover -s scripts`.

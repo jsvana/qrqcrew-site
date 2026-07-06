@@ -12,6 +12,7 @@ concurrency:
   cancel-in-progress: false
 
 permissions:
+  contents: write
   pages: write
   id-token: write
 
@@ -32,6 +33,28 @@ jobs:
           key: qrz-cache-${{ hashFiles('members.txt') }}
           restore-keys: |
             qrz-cache-
+
+      # Check every member callsign against QRZ (live, bypasses the cache)
+      # and rewrite members.txt / qrqcrew-notes.txt when calls have changed.
+      # continue-on-error keeps a QRZ outage from blocking the deploy.
+      - name: Update changed callsigns from QRZ
+        continue-on-error: true
+        env:
+          QRZ_USERNAME: ${{ secrets.QRZ_USERNAME }}
+          QRZ_PASSWORD: ${{ secrets.QRZ_PASSWORD }}
+        run: python3 scripts/update-callsigns.py --apply
+
+      - name: Commit callsign updates
+        run: |
+          if git diff --quiet -- members.txt qrqcrew-notes.txt; then
+            echo "No callsign changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add members.txt qrqcrew-notes.txt
+          git commit -m "Update member callsigns from QRZ"
+          git push origin HEAD:main || (git pull --rebase origin main && git push origin HEAD:main)
 
       # QRZ credentials let the roster follow callsign changes (old -> new).
       - name: Build roster page
