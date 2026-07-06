@@ -40,7 +40,6 @@ KE9BHN ⚓ QRQ Crew #16
 KF6YAL ⚓ QRQ Crew #8
 KG5VNQ ⚓ QRQ Crew #24
 KI5DRY ⚓ QRQ Crew #89
-KI5GTR ⚓ QRQ Crew #38
 KI7QCF ⚓ QRQ Crew #3
 KJ5CMP ⚓ QRQ Crew #44
 KK7QAS ⚓ QRQ Crew #45
@@ -75,6 +74,7 @@ NA7DO ⚓ QRQ Crew #19
 ND4K ⚓ QRQ Crew #42
 NE5A ⚓ QRQ Crew #72
 NN3E ⚓ QRQ Crew #52
+NQ5A ⚓ QRQ Crew #38
 NQ8J ⚓ QRQ Crew #84
 NR4A ⚓ QRQ Crew #51
 NU1D ⚓ QRQ Crew #68

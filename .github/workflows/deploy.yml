@@ -24,9 +24,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build roster page
-        run: python3 scripts/build-roster.py
-
       # Persist QRZ lookups between runs so we only query newly added callsigns.
       - name: Restore QRZ cache
         uses: actions/cache@v4
@@ -35,6 +32,13 @@ jobs:
           key: qrz-cache-${{ hashFiles('members.txt') }}
           restore-keys: |
             qrz-cache-
+
+      # QRZ credentials let the roster follow callsign changes (old -> new).
+      - name: Build roster page
+        env:
+          QRZ_USERNAME: ${{ secrets.QRZ_USERNAME }}
+          QRZ_PASSWORD: ${{ secrets.QRZ_PASSWORD }}
+        run: python3 scripts/build-roster.py
 
       - name: Build crew map data
         env:
