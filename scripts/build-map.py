@@ -62,6 +62,9 @@ ISO = {
     "FI": ("246", "Finland"),
     "DK": ("208", "Denmark"),
     "PL": ("616", "Poland"),
+    "RO": ("642", "Romania"),
+    "PH": ("608", "Philippines"),
+    "KG": ("417", "Kyrgyzstan"),
     "CZ": ("203", "Czechia"),
     "IE": ("372", "Ireland"),
     "RU": ("643", "Russia"),
@@ -132,6 +135,13 @@ _add_prefixes("FI", ["OF", "OG", "OH", "OI"])
 _add_prefixes("DK", ["OU", "OV", "OW", "OX", "OY", "OZ"])
 _add_prefixes("PL", ["SN", "SO", "SP", "SQ", "SR"])
 _add_prefixes("CZ", ["OK", "OL"])
+# Romania: the YO-YR block (YL is Latvia, YS El Salvador, YT/YU Serbia)
+_add_prefixes("RO", ["YO", "YP", "YQ", "YR"])
+# Philippines: DU-DZ (the DA-DR block above is Germany)
+_add_prefixes("PH", ["DU", "DV", "DW", "DX", "DY", "DZ", "4D", "4E", "4F",
+                     "4G", "4H", "4I"])
+# Kyrgyzstan (EK is Armenia, EM/EN/EO Ukraine, EY Tajikistan)
+_add_prefixes("KG", ["EX"])
 _add_prefixes("IE", ["EI", "EJ"])
 _add_prefixes("RU", ["R", "UA", "UB", "UC", "UD", "UE", "UF", "UG", "UH", "UI"])
 _add_prefixes("UA", ["UR", "US", "UT", "UU", "UV", "UW", "UX", "UY", "UZ",
