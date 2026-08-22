@@ -1,9 +1,10 @@
 # QC Callsign Notes for Ham2K PoLo
-# Generated: 2026-08-22 13:41:42 UTC
+# Generated: 2026-08-22 14:41:53 UTC
 # Do not edit manually - this file is auto-generated
 
 AA0YY ⚓ MARK B QC #86
 AA3TZ ⚓ Tom J QC #174
+AB4KT ⚓ KENNETH J QC #184
 AB5M ⚓ John S QC #90
 AC4NK ⚓ Ryan A QC #5
 AD7N ⚓ BENJAMIN A QC #17
@@ -46,6 +47,7 @@ K2MZ ⚓ Robert S QC #83
 K4FIR ⚓ Herbert H QC #41
 K4FR ⚓ Scott D QC #4
 K4MW ⚓ PETER D QC #1
+K4ZSR ⚓ Zachary QC #181
 K5OHY ⚓ Timothy D QC #13
 K5ZM ⚓ IAN M QC #120
 K6AJ ⚓ MICHAEL P QC #61
@@ -89,6 +91,7 @@ KQ4MHE ⚓ Michael QC #122
 KQ4MVW ⚓ Marshall G QC #64
 KR4EBK ⚓ Andrew J QC #29
 KR4FLM ⚓ Hunter C QC #98
+KR4FTN ⚓ Maggie QC #180
 KR8P ⚓ BRADLEY A QC #7
 KT0AA ⚓ TONY QC #18
 KT3X ⚓ Dr. Brian A QC #157
@@ -106,7 +109,9 @@ N2TNN ⚓ Dean G QC #80
 N3ADP ⚓ SCOTT T QC #114
 N3JT ⚓ JAMES M QC #73
 N3VO ⚓ MARCUS W QC #87
+N4BKY ⚓ Rebecca L QC #182
 N4EWD ⚓ Richard K QC #59
+N4FFF ⚓ Michael D QC #183
 N4GO ⚓ JEROD C QC #40
 N4LSJ ⚓ Thomas S QC #82
 N4RLD ⚓ Rickie L QC #110
