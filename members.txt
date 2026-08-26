@@ -1,5 +1,5 @@
 # QC Callsign Notes for Ham2K PoLo
-# Generated: 2026-08-26 15:09:41 UTC
+# Generated: 2026-08-26 16:09:55 UTC
 # Do not edit manually - this file is auto-generated
 
 AA0YY ⚓ MARK B QC #86
@@ -55,6 +55,9 @@ K4AGF ⚓ GREGORY M QC #190
 K4FIR ⚓ Herbert H QC #41
 K4FR ⚓ Scott D QC #4
 K4MW ⚓ PETER D QC #1
+K4NYM ⚓ William F QC #212
+K4VOZ ⚓ TOMAS QC #209
+K4WG ⚓ GENE L QC #210
 K4ZSR ⚓ Zachary QC #181
 K5OGR ⚓ William J QC #187
 K5OHY ⚓ Timothy D QC #13
@@ -87,6 +90,7 @@ KF0DQU ⚓ Joseph J QC #153
 KG5VNQ ⚓ Justin T QC #24
 KI5DRY ⚓ Lawrence E QC #89
 KI7QCF ⚓ FORREST S QC #3
+KJ4M ⚓ EUGENE A QC #211
 KJ5CMP ⚓ ISAIAH L QC #44
 KJ5NVF ⚓ Maverick QC #188
 KK7D ⚓ Michael A QC #8
