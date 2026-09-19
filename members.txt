@@ -1,5 +1,5 @@
 # QC Callsign Notes for Ham2K PoLo
-# Generated: 2026-09-18 23:41:14 UTC
+# Generated: 2026-09-19 00:41:29 UTC
 # Do not edit manually - this file is auto-generated
 
 AA0YY ⚓ MARK B QC #86
@@ -52,6 +52,7 @@ K1JD ⚓ JOHN G QC #63
 K1KIG ⚓ Kiersten S QC #137
 K2MJP ⚓ Matthew J QC #215
 K2MZ ⚓ Robert S QC #83
+K2RAT ⚓ Brian M QC #218
 K3CBK ⚓ Christopher B QC #206
 K4AGF ⚓ GREGORY M QC #190
 K4FIR ⚓ Herbert H QC #41
