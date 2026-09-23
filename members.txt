@@ -1,5 +1,5 @@
 # QC Callsign Notes for Ham2K PoLo
-# Generated: 2026-09-23 04:02:26 UTC
+# Generated: 2026-09-23 05:02:38 UTC
 # Do not edit manually - this file is auto-generated
 
 AA0YY ⚓ MARK B QC #86
@@ -167,6 +167,7 @@ NR4A ⚓ SAMUEL D QC #51
 NU1D ⚓ Seth M QC #68
 NU4J ⚓ HARRY W QC #32
 OE3KME ⚓ Martin QC #104
+OH1HAQ ⚓ HANNU QC #220
 SP2HF ⚓ Kevin QC #178
 VA3EKR ⚓ Scott K. QC #109
 VA4ADM ⚓ Paul QC #27
@@ -206,6 +207,7 @@ WB4AQL ⚓ MICHAEL H QC #67
 WB4IT ⚓ Brian QC #47
 WB4SPB ⚓ RANDALL J QC #152
 WB8ELK ⚓ WILLIAM J QC #205
+WB8SCT ⚓ JACK QC #221
 WD4DAN ⚓ Dan QC #146
 WD5JR ⚓ JOSIAH L QC #23
 WE5J ⚓ Scott C QC #55
