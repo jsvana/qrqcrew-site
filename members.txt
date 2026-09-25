@@ -1,5 +1,5 @@
 # QC Callsign Notes for Ham2K PoLo
-# Generated: 2026-09-25 22:16:39 UTC
+# Generated: 2026-09-25 23:16:52 UTC
 # Do not edit manually - this file is auto-generated
 
 AA0YY ⚓ MARK B QC #86
@@ -114,6 +114,7 @@ KO4TFE ⚓ Jason QC #21
 KQ4DUX ⚓ Jay B QC #37
 KQ4MHE ⚓ Michael QC #122
 KQ4MVW ⚓ Marshall G QC #64
+KQ4WJP ⚓ Kristoffer C QC #223
 KR4EBK ⚓ Andrew J QC #29
 KR4FLM ⚓ Hunter C QC #98
 KR4FTN ⚓ Maggie QC #180
